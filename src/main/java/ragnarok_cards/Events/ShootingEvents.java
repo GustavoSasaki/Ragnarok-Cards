@@ -18,8 +18,7 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static ragnarok_cards.Events.VerificateCards.HowManyCards;
-import static ragnarok_cards.Events.VerificateCards.cardActivate;
+import static ragnarok_cards.Events.VerificateCards.*;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ShootingEvents {
@@ -49,10 +48,7 @@ public class ShootingEvents {
             return;
         }
 
-        HowManyCards(shooter, "snowman");
-        System.out.println(cardActivate(shooter, "snowman"));
-
-        if(cardActivate(shooter, "snowman")) {
+        if(SingleCardActivate(shooter, "snowman")) {
             //3seconds of slow
             ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500));
         }

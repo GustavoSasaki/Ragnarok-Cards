@@ -1,0 +1,52 @@
+package ragnarok_cards.Events;
+
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.Random;
+
+import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
+
+@Mod.EventBusSubscriber(Dist.CLIENT)
+public class EatFood {
+    static public final Random rand = new Random();
+
+    @SubscribeEvent
+    public static void finishEat(LivingEntityUseItemEvent.Finish event) {
+        if(event.getEntity().world.isRemote() || !(event.getEntity() instanceof PlayerEntity)){
+            return;
+        }
+        PlayerEntity player = (PlayerEntity) event.getEntity();
+        Item item = event.getItem().getItem();
+
+        if(item.isFood() && item.getFood().isMeat() ){
+            //when pass, give negative effect
+            if(SingleCardActivate (player, "sheep")){
+                player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 30));
+                player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500,2));
+                player.addPotionEffect(new EffectInstance(Effects.POISON, 500));
+                player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 500,2));
+                ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.AMBIENT_CAVE, player.getSoundCategory(), 1.0F, 1.0F);
+            }else {
+                int aa = player.world.rand.nextInt(2);
+                if (aa == 0) {
+                    player.addPotionEffect(new EffectInstance(Effects.WITHER, 1000));
+                } else {
+                    player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1000));
+                }
+            }
+        }
+    }
+
+}

@@ -4,32 +4,32 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.EggEntity;
 import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static ragnarok_cards.Events.VerificateCards.*;
+import java.util.Map;
+
+import static ragnarok_cards.Utils.VerificateCards.*;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ShootingEvents {
 
-    @SubscribeEvent
-    public static void pickupItem(EntityItemPickupEvent event) {
-        System.out.println("Item picked up!");
-    }
 
     @SubscribeEvent
-    public static void cardSnowMan(ProjectileImpactEvent.Throwable event) {
+    public static void ProjectileImpactEvent(ProjectileImpactEvent.Throwable event) {
+        if(event.getEntity().world.isRemote()){
+            return;
+        }
+
         ThrowableEntity throwable = event.getThrowable();
         if(!(throwable instanceof SnowballEntity)) {
             return;
@@ -49,9 +49,38 @@ public class ShootingEvents {
         }
 
         if(SingleCardActivate(shooter, "snowman")) {
+
+            int curSlowTime = 0;
+            if( ((LivingEntity) target).isPotionActive(Effects.SLOWNESS)){
+                curSlowTime = ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
+            }
+
+            System.out.println(curSlowTime);
             //3seconds of slow
-            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500));
+            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500 + curSlowTime));
         }
 
     }
+
+    @SubscribeEvent
+    public static void cardSnowMan(ProjectileImpactEvent.Arrow event) {
+
+        if(!(event.getRayTraceResult() instanceof EntityRayTraceResult)){
+            return;
+        }
+        Entity target = ((EntityRayTraceResult) event.getRayTraceResult()).getEntity();
+
+        if(!(target instanceof  PlayerEntity)){
+            return;
+        }
+
+        PlayerEntity player = (PlayerEntity) target;
+
+        if(SingleCardActivate(player, "creeper", 1/5)) {
+            player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 30));
+            player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 300,3));
+            player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 300,2));
+        }
+    }
+
 }

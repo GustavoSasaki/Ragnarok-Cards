@@ -93,6 +93,7 @@ public class DamageMultiplier {
     // bonus attack when player consecutively hitting same type of enemy
     private static float ApplySkeletonCard(PlayerEntity player,LivingEntity target, float multiplier,Map<String, Integer> cards){
         if(cards.containsKey("skeleton")) {
+            System.out.println(multiplier);
             CompoundNBT nbt = player.getPersistentData();
 
             if (!nbt.contains("lastTypeEnemyHitten")){
@@ -107,13 +108,14 @@ public class DamageMultiplier {
                 consecutivelyHits = nbt.getInt("consecutivelyHits");
                 consecutivelyHits += cards.get("skeleton");
 
-                multiplier += 0.01 * consecutivelyHits;
+                multiplier += 0.02 * consecutivelyHits;
             }else{
                 consecutivelyHits = 1;
                 nbt.putString( "lastTypeEnemyHitten", target.getType().toString() );
             }
 
             nbt.putInt( "consecutivelyHits", consecutivelyHits);
+            System.out.println(multiplier);
         }
 
         return multiplier;

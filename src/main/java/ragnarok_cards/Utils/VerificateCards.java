@@ -38,7 +38,7 @@ public class VerificateCards {
         cardNameToChance.put("creeper", 20);
         cardNameToChance.put("phantom", 2);//if pass, activate negative effect
         cardNameToChance.put("sheep", 2);//if pass, activate negative effect
-        cardNameToChance.put("witch",60);
+        cardNameToChance.put("witch",3);
     }
 
     static public boolean passCheck(int quantity, float checkMultiplier){

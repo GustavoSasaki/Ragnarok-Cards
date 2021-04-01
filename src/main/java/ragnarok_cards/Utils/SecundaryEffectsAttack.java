@@ -1,6 +1,5 @@
 package ragnarok_cards.Utils;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
@@ -8,15 +7,34 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.server.ServerWorld;
-
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
 
-import static ragnarok_cards.Utils.VerificateCards.cardNameToChance;
+
 import static ragnarok_cards.Utils.VerificateCards.passCheck;
 
 public class SecundaryEffectsAttack {
-    static public final Random rand = new Random();
+
+    private interface ApplyEffect{
+        public EffectInstance apply();
+    }
+    static protected ArrayList<ApplyEffect> applyWitchRandomEffect = new ArrayList<ApplyEffect>();
+    static{
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.SPEED, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.SLOWNESS, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.STRENGTH, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.WEAKNESS, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.REGENERATION, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.RESISTANCE, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.FIRE_RESISTANCE, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.INVISIBILITY, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.POISON, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.GLOWING, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.SLOW_FALLING, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.LEVITATION, 1000));
+        applyWitchRandomEffect.add( () -> new EffectInstance(Effects.WITHER, 1000));
+    }
+
 
     static public void ApplyAttackSecundayEffects (DamageSource source, LivingEntity target, Map<String, Integer> cards){
         PlayerEntity player = (PlayerEntity) source.getTrueSource();
@@ -52,10 +70,9 @@ public class SecundaryEffectsAttack {
     }
 
     private static void applyRandomEffect(LivingEntity entity){
-        int randomEffects = rand.nextInt(24);
-        if(randomEffects == 0)
-            entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 1000));
-        if(randomEffects == 1)
-            entity.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 1000));
+        int randomEffects = entity.world.rand.nextInt(applyWitchRandomEffect.size());
+        EffectInstance newEffect =  applyWitchRandomEffect.get(randomEffects).apply();
+        entity.addPotionEffect(newEffect);
     }
+
 }

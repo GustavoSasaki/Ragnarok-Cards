@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
-    "ragnarok_cards:card_drop"
+    "ragnarok_cards:wheat_harvest",
+    "ragnarok_cards:wheat_harvest2"
   ]
 }

@@ -1,13 +1,19 @@
 package ragnarok_cards;
 
+import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import ragnarok_cards.Items.RagnarokCard;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import ragnarok_cards.Items.aa;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+
 
 
 @Mod(RegisterEventsItems.MOD_ID)
@@ -16,6 +22,10 @@ public class RegisterEventsItems
 {
     public static final String MOD_ID = "ragnarok_cards";
 
+
+ private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
+ private static final RegistryObject<aa.WheatSeedsConverterModifier.Serializer> WHEATSEEDS = GLM.register("wheat_harvest", aa.WheatSeedsConverterModifier.Serializer::new);
+ private static final RegistryObject<aa.WheatSeedsConverterModifier2.Serializer> SILVERFISH = GLM.register("wheat_harvest2",aa.WheatSeedsConverterModifier2.Serializer::new);
 
     //implementados mas falta melhor sinalização
     public static final Item SNOWMAN_CARD = new RagnarokCard("snowman","Snowballs have 5% to add 3s slowness"); //ok
@@ -50,6 +60,8 @@ public class RegisterEventsItems
 
     //100 tested
 
+    //todo axe hit destroy equiped wapon/armor
+    //todo hoe last hit chance to spawn golem 
     //todo
     //chicken;cow;squid;enderman;zombie pigman;
     //todo
@@ -62,5 +74,11 @@ public class RegisterEventsItems
                 SHEEP_CARD,SKELETON_CARD,SNOWMAN_CARD,SPIDER_CARD,WHITER_SKELETON_CARD,WITCH_CARD,WOLF_CARD,ZOMBIE_CARD,
                 ZOMBIE_PIGLIN_CARD);
     }
+
+
+ public RegisterEventsItems() {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+  GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
+ }
 
 }

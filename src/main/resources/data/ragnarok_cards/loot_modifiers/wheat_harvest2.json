@@ -1,0 +1,13 @@
+{
+  "type": "ragnarok_cards:wheat_harvest2",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:silverfish"
+      },
+      "entity": "this"
+    }
+  ]
+}

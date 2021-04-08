@@ -17,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import ragnarok_cards.RegisterEventsItems;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 
 public class aa {
@@ -35,10 +36,6 @@ public class aa {
         @Nonnull
         @Override
         public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            //
-            // Additional conditions can be checked, though as much as possible should be parameterized via JSON data.
-            // It is better to write a new ILootCondition implementation than to do things here.
-            //
             int numSeeds = 0;
             for(ItemStack stack : generatedLoot) {
                 if(stack.getItem() == itemToCheck)
@@ -52,7 +49,6 @@ public class aa {
                     generatedLoot.add(new ItemStack(itemToCheck, numSeeds));
             }
             generatedLoot.add(new ItemStack(Items.BAMBOO,2));
-            System.out.println("UQQQQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
             return generatedLoot;
         }
 
@@ -78,28 +74,30 @@ public class aa {
     }
 
 
-    public static class WheatSeedsConverterModifier2 extends LootModifier {
-        public WheatSeedsConverterModifier2(ILootCondition[] conditionsIn) {
+    public static class add_to_drop extends LootModifier {
+        public add_to_drop(ILootCondition[] conditionsIn) {
             super(conditionsIn);
         }
 
         @Nonnull
         @Override
         public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
+            if(generatedLoot.equals(null)){
+                generatedLoot = new ArrayList<ItemStack>();
+            }
             generatedLoot.add(new ItemStack(Items.BAMBOO,2));
-            System.out.println("UQQQQOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
             return generatedLoot;
         }
 
-        public static class Serializer extends GlobalLootModifierSerializer<WheatSeedsConverterModifier2> {
+        public static class Serializer extends GlobalLootModifierSerializer<add_to_drop> {
 
             @Override
-            public WheatSeedsConverterModifier2 read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
-                return new WheatSeedsConverterModifier2(conditionsIn);
+            public add_to_drop read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
+                return new add_to_drop(conditionsIn);
             }
 
             @Override
-            public JsonObject write(WheatSeedsConverterModifier2 instance) {
+            public JsonObject write(add_to_drop instance) {
                 JsonObject json = makeConditions(instance.conditions);
                 return json;
             }

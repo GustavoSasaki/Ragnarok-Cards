@@ -1,5 +1,5 @@
 {
-  "type": "ragnarok_cards:wheat_harvest2",
+  "type": "ragnarok_cards:add_to_drop",
   "conditions":
   [
     {

@@ -81,7 +81,8 @@ public class RagnarokCard extends Item {
             if(playerIn.inventory.mainInventory.get(i).isEmpty()){
                 playerIn.inventory.setInventorySlotContents(i,playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem));
                 playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem,ItemStack.EMPTY);
-                ((ServerWorld) playerIn.world).playSound((PlayerEntity)null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, playerIn.getSoundCategory(), 1.0F, 1.0F);
+
+                playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, playerIn.getSoundCategory(), 1.0F, 1.0F);
                 break;
             }
         }

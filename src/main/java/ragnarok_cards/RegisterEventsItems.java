@@ -24,8 +24,8 @@ public class RegisterEventsItems
 
 
  private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
- private static final RegistryObject<aa.WheatSeedsConverterModifier.Serializer> WHEATSEEDS = GLM.register("wheat_harvest", aa.WheatSeedsConverterModifier.Serializer::new);
- private static final RegistryObject<aa.WheatSeedsConverterModifier2.Serializer> SILVERFISH = GLM.register("wheat_harvest2",aa.WheatSeedsConverterModifier2.Serializer::new);
+ //private static final RegistryObject<aa.WheatSeedsConverterModifier.Serializer> WHEATSEEDS = GLM.register("wheat_harvest", aa.WheatSeedsConverterModifier.Serializer::new);
+ private static final RegistryObject<aa.add_to_drop.Serializer> SILVERFISH = GLM.register("add_to_drop",aa.add_to_drop.Serializer::new);
 
     //implementados mas falta melhor sinalização
     public static final Item SNOWMAN_CARD = new RagnarokCard("snowman","Snowballs have 5% to add 3s slowness"); //ok

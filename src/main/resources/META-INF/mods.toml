@@ -1,26 +1,26 @@
 
 modLoader="javafml"
 loaderVersion="[35,)"
-license="All rights reserved"
-# A URL to refer people to when problems occur with this mod
-issueTrackerURL="http://my.issue.tracker/" #optional
+license="MIT"
+
+issueTrackerURL="https://github.com/GustavoSasaki/Ragnarok-Cards/issues"
 updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards/raw/master/update.json"
 
 [[mods]]
 modId="ragnarok_cards"
-version="$1.16.4-1a"
+version="1.16.4-0.0.1"
 displayName="Ragnarok Cards"
-# A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards" #optional
-# A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="http://example.com/" #optional
+
+updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
+displayURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="examplemod.png" #optional
+logoFile="logo.png" #optional
 
 credits="Gustavo Sasaki (TheAgent00g)"
 #authors="Gustavo Sasaki (TheAgent00g)" #optional
 description='''
-This mod adds the Ragnarok Cards, they are items, which when in the upper row of player inventory gives a variety of combat buffs and debuffs. Every card is dropped by a unique vanilla mob with a really low chance.'''
+This mod adds the Ragnarok Cards, they are items, which when in the upper row of player inventory gives a variety of combat buffs and debuffs.
+Every card is dropped by a unique vanilla mob with a really low chance.'''
 
 [[dependencies.ragnarok_cards]] #optional
     modId="forge"

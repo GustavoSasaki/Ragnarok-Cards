@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import ragnarok_cards.Items.aa;
+import ragnarok_cards.Items.LootModifiers;
 
 import java.util.Arrays;
 
@@ -25,7 +25,7 @@ public class RegisterEventsItems
 
  private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
  //private static final RegistryObject<aa.WheatSeedsConverterModifier.Serializer> WHEATSEEDS = GLM.register("wheat_harvest", aa.WheatSeedsConverterModifier.Serializer::new);
- private static final RegistryObject<aa.add_to_drop.Serializer> SILVERFISH = GLM.register("add_to_drop",aa.add_to_drop.Serializer::new);
+ private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SILVERFISH = GLM.register("add_to_drop", LootModifiers.AddMobDrop.Serializer::new);
 
     //implementados mas falta melhor sinalização
     public static final Item SNOWMAN_CARD = new RagnarokCard("snowman","Snowballs have 5% to add 3s slowness"); //ok

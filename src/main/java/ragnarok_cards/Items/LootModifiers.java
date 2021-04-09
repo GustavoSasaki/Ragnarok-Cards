@@ -20,9 +20,9 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class aa {
+public class LootModifiers {
 
-    public static class WheatSeedsConverterModifier extends LootModifier {
+    public static class WheatSeedsConverterModifier extends net.minecraftforge.common.loot.LootModifier {
         private final int numSeedsToConvert;
         private final Item itemToCheck;
         private final Item itemReward;
@@ -74,30 +74,27 @@ public class aa {
     }
 
 
-    public static class add_to_drop extends LootModifier {
-        public add_to_drop(ILootCondition[] conditionsIn) {
+    public static class AddMobDrop extends net.minecraftforge.common.loot.LootModifier {
+        public AddMobDrop(ILootCondition[] conditionsIn) {
             super(conditionsIn);
         }
 
         @Nonnull
         @Override
         public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            if(generatedLoot.equals(null)){
-                generatedLoot = new ArrayList<ItemStack>();
-            }
             generatedLoot.add(new ItemStack(Items.BAMBOO,2));
             return generatedLoot;
         }
 
-        public static class Serializer extends GlobalLootModifierSerializer<add_to_drop> {
+        public static class Serializer extends GlobalLootModifierSerializer<AddMobDrop> {
 
             @Override
-            public add_to_drop read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
-                return new add_to_drop(conditionsIn);
+            public AddMobDrop read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
+                return new AddMobDrop(conditionsIn);
             }
 
             @Override
-            public JsonObject write(add_to_drop instance) {
+            public JsonObject write(AddMobDrop instance) {
                 JsonObject json = makeConditions(instance.conditions);
                 return json;
             }

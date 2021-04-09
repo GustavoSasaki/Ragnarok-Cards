@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:witch_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:witch"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 10,
+  "cardItem":"ragnarok_cards:witch_card"
+}

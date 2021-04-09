@@ -1,13 +1,15 @@
 {
-  "type": "ragnarok_cards:add_to_drop",
+  "type": "ragnarok_cards:piglin_card",
   "conditions":
   [
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:silverfish"
+        "type": "minecraft:piglin"
       },
       "entity": "this"
     }
-  ]
+  ],
+  "chance": 6,
+  "cardItem":"ragnarok_cards:piglin_card"
 }

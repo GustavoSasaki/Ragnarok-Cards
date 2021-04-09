@@ -75,14 +75,21 @@ public class LootModifiers {
 
 
     public static class AddMobDrop extends net.minecraftforge.common.loot.LootModifier {
-        public AddMobDrop(ILootCondition[] conditionsIn) {
+        private final int chance;
+        private final Item cardItem;
+        public AddMobDrop(ILootCondition[] conditionsIn,int chance,Item cardItem) {
             super(conditionsIn);
+            this.chance = chance;
+            this.cardItem = cardItem;
         }
 
         @Nonnull
         @Override
         public List<ItemStack> doApply(List<ItemStack> generatedLoot, LootContext context) {
-            generatedLoot.add(new ItemStack(Items.BAMBOO,2));
+            System.out.println(context.getWorld().isRemote);
+            if(this.chance > context.getRandom().nextInt(100)){
+                generatedLoot.add(new ItemStack(this.cardItem));
+            }
             return generatedLoot;
         }
 
@@ -90,12 +97,16 @@ public class LootModifiers {
 
             @Override
             public AddMobDrop read(ResourceLocation name, JsonObject object, ILootCondition[] conditionsIn) {
-                return new AddMobDrop(conditionsIn);
+                int chance = JSONUtils.getInt(object, "chance");
+                Item itemCard = ForgeRegistries.ITEMS.getValue(new ResourceLocation((JSONUtils.getString(object, "cardItem"))));
+                return new AddMobDrop(conditionsIn, chance, itemCard);
             }
 
             @Override
             public JsonObject write(AddMobDrop instance) {
                 JsonObject json = makeConditions(instance.conditions);
+                json.addProperty("chance", instance.chance);
+                json.addProperty("cardItem", ForgeRegistries.ITEMS.getKey(instance.cardItem).toString());
                 return json;
             }
         }

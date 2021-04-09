@@ -23,12 +23,26 @@ public class RegisterEventsItems
     public static final String MOD_ID = "ragnarok_cards";
 
 
- private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
- //private static final RegistryObject<aa.WheatSeedsConverterModifier.Serializer> WHEATSEEDS = GLM.register("wheat_harvest", aa.WheatSeedsConverterModifier.Serializer::new);
- private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SILVERFISH = GLM.register("add_to_drop", LootModifiers.AddMobDrop.Serializer::new);
+    private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> CAVE_SPIDER = GLM.register("cave_spider_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> CREEPER = GLM.register("creeper_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> OCELOT = GLM.register("ocelot_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> PHANTOM = GLM.register("phantom_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> PIG = GLM.register("pig_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> PIGLIN = GLM.register("piglin_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SHEEP = GLM.register("sheep_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SKELETON = GLM.register("skeleton_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SNOW_GOLEM = GLM.register("snow_golem_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SPIDER = GLM.register("spider_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> WHITER_SKELETON = GLM.register("whiter_skeleton_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> WITCH = GLM.register("witch_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> WOLF = GLM.register("wolf_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> ZOMBIE = GLM.register("zombie_card", LootModifiers.AddMobDrop.Serializer::new);
+    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> ZOMBIE_PIGLIN = GLM.register("zombie_piglin_card", LootModifiers.AddMobDrop.Serializer::new);
+
 
     //implementados mas falta melhor sinalização
-    public static final Item SNOWMAN_CARD = new RagnarokCard("snowman","Snowballs have 5% to add 3s slowness"); //ok
+    public static final Item SNOWMAN_CARD = new RagnarokCard("snow_golem","Snowballs have 5% to add 3s slowness"); //ok
 
     //todo add aprticle when hit enemy whiter e apply whiter
     //todo add a cooldown
@@ -46,7 +60,7 @@ public class RegisterEventsItems
     public static final Item SKELETON_CARD = new RagnarokCard("skeleton",
             Arrays.asList("Attacks against same type enemies gets 2% consecutively stronger","Bonus reset if hit other type of enemy"),
             "fire damage deal 20% more");
-    public static final Item SPIDER_CARD = new RagnarokCard("spider","Bane of arthropods","bane of arthropods");
+    public static final Item SPIDER_CARD = new RagnarokCard("spider","Bane of arthropods","Bane of arthropods");
     //maybe change to close range weapon
     public static final Item ZOMBIE_PIGLIN_CARD = new RagnarokCard("zombie_piglin","4% chance to deal 3x damage","2% chance to receive 3x damage");
     public static final Item CAVE_SPIDER_CARD = new RagnarokCard("cave_spider","4% chance to add poison with close range weapons","Bane against arthropods");

@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:whiter_skeletoncard",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:whiter_skeleton"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 6,
+  "cardItem":"ragnarok_cards:whiter_skeleton_card"
+}

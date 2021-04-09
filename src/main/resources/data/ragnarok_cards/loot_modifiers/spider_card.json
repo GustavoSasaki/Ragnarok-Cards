@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:spider_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:spider"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 3,
+  "cardItem":"ragnarok_cards:spider_card"
+}

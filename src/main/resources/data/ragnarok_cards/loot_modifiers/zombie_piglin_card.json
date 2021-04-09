@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:zombie_piglin_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:zombie_piglin"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 4,
+  "cardItem":"ragnarok_cards:zombie_piglin_card"
+}

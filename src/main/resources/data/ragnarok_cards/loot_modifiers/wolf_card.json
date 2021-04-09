@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:wolf_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:wolf"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 10,
+  "cardItem":"ragnarok_cards:wolf_card"
+}

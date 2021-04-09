@@ -2,6 +2,20 @@
   "replace": false,
   "entries": [
     "ragnarok_cards:wheat_harvest",
-    "ragnarok_cards:add_to_drop"
+    "ragnarok_cards:cave_spider_card",
+    "ragnarok_cards:creeper_card",
+    "ragnarok_cards:ocelot_card",
+    "ragnarok_cards:phantom_card",
+    "ragnarok_cards:pig_card",
+    "ragnarok_cards:piglin_card",
+    "ragnarok_cards:sheep_card",
+    "ragnarok_cards:skeleton_card",
+    "ragnarok_cards:snow_golem_card",
+    "ragnarok_cards:spider_card",
+    "ragnarok_cards:whiter_skeleton_card",
+    "ragnarok_cards:witch_card",
+    "ragnarok_cards:wolf_card",
+    "ragnarok_cards:zombie_card",
+    "ragnarok_cards:zombie_piglin_card"
   ]
 }

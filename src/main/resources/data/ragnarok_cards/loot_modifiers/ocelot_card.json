@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:ocelot_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:ocelot"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 10,
+  "cardItem":"ragnarok_cards:ocelot_card"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:cave_spider_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:cave_spider"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 6,
+  "cardItem":"ragnarok_cards:cave_spider_card"
+}

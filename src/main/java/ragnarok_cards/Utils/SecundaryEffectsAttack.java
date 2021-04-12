@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
+import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
 import static ragnarok_cards.Utils.VerificateCards.passCheck;
 
 public class SecundaryEffectsAttack {
@@ -67,6 +68,24 @@ public class SecundaryEffectsAttack {
                 ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_WITCH_CELEBRATE, player.getSoundCategory(), 1.0F, 1.0F);
             }
         }
+
+        if(cards.containsKey("blaze")) {
+
+            if(target.getFireTimer() == 0){
+                if (passCheck(HowManyCards(player,"blaze"),0.01f)){
+                    target.setFire(5);
+                }
+            }else {
+                if (passCheck("blaze", cards)) {
+
+                    target.setFire(target.getFireTimer() + 5);
+                    ((ServerWorld) player.world).playSound((PlayerEntity) null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_BLAZE_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
+                }
+            }
+        }
+        //if(cards.containsKey("vindicator") && source.){
+
+        //}
     }
 
     private static void applyRandomEffect(LivingEntity entity){

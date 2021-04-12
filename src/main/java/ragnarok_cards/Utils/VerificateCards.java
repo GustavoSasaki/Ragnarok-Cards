@@ -24,11 +24,13 @@ import java.util.Random;
 import static ragnarok_cards.Utils.DamageMultiplier.ApplyDamageMultiplier;
 import static ragnarok_cards.Utils.DefenseMultiplier.ApplyDefenseMultiplier;
 import static ragnarok_cards.Utils.SecundaryEffectsAttack.ApplyAttackSecundayEffects;
+import static ragnarok_cards.Utils.onKill.ApplyOnKillEffects;
 
 public class VerificateCards {
     static public final Random rand = new Random();
     static protected Map<String, Integer> cardNameToChance = new HashMap<String, Integer>();
     static{
+        cardNameToChance.put("blaze",30);
         cardNameToChance.put("snowman", 5);
         cardNameToChance.put("wolf", 20);
         cardNameToChance.put("ocelot", 30);
@@ -98,7 +100,12 @@ public class VerificateCards {
 
         ApplyAttackSecundayEffects (source,target, cards);
 
-        return ApplyDamageMultiplier (damage, source, target,cards);
+        damage = ApplyDamageMultiplier (damage, source, target,cards);
+
+        if(damage >= target.getHealth()){
+            ApplyOnKillEffects(source,target, cards);
+        }
+        return damage;
     }
 
     static public float ApplyDefenseCards(float damage, PlayerEntity player, DamageSource source){

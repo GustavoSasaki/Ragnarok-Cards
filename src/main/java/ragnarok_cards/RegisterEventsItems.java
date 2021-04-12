@@ -23,23 +23,13 @@ public class RegisterEventsItems
     public static final String MOD_ID = "ragnarok_cards";
 
 
-    private static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> CAVE_SPIDER = GLM.register("cave_spider_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> CREEPER = GLM.register("creeper_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> OCELOT = GLM.register("ocelot_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> PHANTOM = GLM.register("phantom_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> PIG = GLM.register("pig_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> PIGLIN = GLM.register("piglin_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SHEEP = GLM.register("sheep_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SKELETON = GLM.register("skeleton_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SNOW_GOLEM = GLM.register("snow_golem_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> SPIDER = GLM.register("spider_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> WHITER_SKELETON = GLM.register("whiter_skeleton_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> WITCH = GLM.register("witch_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> WOLF = GLM.register("wolf_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> ZOMBIE = GLM.register("zombie_card", LootModifiers.AddMobDrop.Serializer::new);
-    private static final RegistryObject<LootModifiers.AddMobDrop.Serializer> ZOMBIE_PIGLIN = GLM.register("zombie_piglin_card", LootModifiers.AddMobDrop.Serializer::new);
 
+    public static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RegisterEventsItems.MOD_ID);
+
+
+    public RegisterEventsItems() {
+        GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
 
     //implementados mas falta melhor sinalização
     public static final Item SNOWMAN_CARD = new RagnarokCard("snow_golem","Snowballs have 5% to add 3s slowness"); //ok
@@ -71,13 +61,18 @@ public class RegisterEventsItems
             "Receive 10% more damage from anything");
     public static final Item SHEEP_CARD = new RagnarokCard("sheep","Additional 25% damage against animals","Extra effects when eating meat"); //ok
     public static final Item WITCH_CARD = new RagnarokCard("witch","Multiplies damage by 1.2 for each effect in the enemy with close range weapons","3% chance with close range weapons to apply random effect in the user and the enemy");
+    //public static final Item VINDICATOR_CARD = new RagnarokCard("vindicator","Fully charge axe attack have 10% to remove one of enemy armor or weapon","Deal 30% less damage to arthropods");
+    //public static final Item VILLAGER_CARD = new RagnarokCard("villager","Killing a enemy with a hoe has 3% to spawn a golem","");
+    public static final Item BLAZE_CARD = new RagnarokCard("blaze",
+            Arrays.asList("Attacks have 1% chance to set enemy on fire for 5 seconds","Attacks have 30% to extend fire for 5 seconds"),
+            "Extra 30% knockback under water");
 
     //100 tested
 
     //todo axe hit destroy equiped wapon/armor
     //todo hoe last hit chance to spawn golem 
     //todo
-    //chicken;cow;squid;enderman;zombie pigman;
+    //chicken;cow;squid;enderman;
     //todo
     //remove some effects for range weapons
     //todo after
@@ -86,13 +81,8 @@ public class RegisterEventsItems
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(CAVE_SPIDER_CARD,CREEPER_CARD,OCELOT_CARD,PHANTOM_CARD,PIG_CARD,PIGLIN_CARD,
                 SHEEP_CARD,SKELETON_CARD,SNOWMAN_CARD,SPIDER_CARD,WHITER_SKELETON_CARD,WITCH_CARD,WOLF_CARD,ZOMBIE_CARD,
-                ZOMBIE_PIGLIN_CARD);
+                ZOMBIE_PIGLIN_CARD,BLAZE_CARD);
     }
 
-
- public RegisterEventsItems() {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-  GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
- }
 
 }

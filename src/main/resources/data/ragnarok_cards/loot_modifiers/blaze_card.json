@@ -1,15 +1,15 @@
 {
-  "type": "ragnarok_cards:cave_spider_card",
+  "type": "ragnarok_cards:blaze_card",
   "conditions":
   [
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:cave_spider"
+        "type": "minecraft:blaze"
       },
       "entity": "this"
     }
   ],
   "chance": 4,
-  "cardItem":"ragnarok_cards:cave_spider_card"
+  "cardItem":"ragnarok_cards:blaze_card"
 }

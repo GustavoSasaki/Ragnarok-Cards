@@ -21,15 +21,20 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ragnarok_cards.RegisterEventsItems.GLM;
+
 public class RagnarokCard extends Item {
     String cardName;
     ArrayList<String> positiveEffects = new ArrayList<String>();
     ArrayList<String> negativeEffects = new ArrayList<String>();
 
+    //this constructor will always activate
     public RagnarokCard(String cardName) {
         super(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT));
+
         this.cardName = cardName;
         setRegistryName("ragnarok_cards",cardName + "_card");
+        GLM.register(cardName + "_card", LootModifiers.AddMobDrop.Serializer::new);
     }
 
     public RagnarokCard(String cardName,List<String> positiveEffectText,String negativeEffectText) {
@@ -76,6 +81,7 @@ public class RagnarokCard extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
+        //put int he upper row inventory if possible
         for(int i=9;i<18;i++){
 
             if(playerIn.inventory.mainInventory.get(i).isEmpty()){

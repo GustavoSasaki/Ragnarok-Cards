@@ -74,13 +74,14 @@ public class DamageMultiplier {
         if(cards.containsKey("piglin")) {
             Item currItem = player.inventory.getCurrentItem().getItem();
 
-            if(currItem instanceof TieredItem){
-                System.out.println( ((TieredItem)currItem).getTier() );
-                if( ((TieredItem)currItem).getTier().getAttackDamage() < 2){
-                    flatDamageBuff += (int) (1.5 * cards.get("piglin"));
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                }
+            if(currItem instanceof TieredItem && ((TieredItem)currItem).getTier().getAttackDamage() < 2){
+                flatDamageBuff += (int) (1.5 * cards.get("piglin"));
             }
+        }
+
+
+        if(cards.containsKey("vindicator") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
+            multiplier *= Math.min(0.1, 1 - 0.30 * cards.get("vindicator"));
         }
 
 

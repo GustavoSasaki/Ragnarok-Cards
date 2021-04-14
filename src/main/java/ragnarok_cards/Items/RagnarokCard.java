@@ -30,7 +30,7 @@ public class RagnarokCard extends Item {
 
     //this constructor will always activate
     public RagnarokCard(String cardName) {
-        super(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT));
+        super(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT).maxStackSize(4));
 
         this.cardName = cardName;
         setRegistryName("ragnarok_cards",cardName + "_card");

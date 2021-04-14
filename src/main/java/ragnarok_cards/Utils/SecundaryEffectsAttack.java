@@ -71,8 +71,9 @@ public class SecundaryEffectsAttack {
 
         if(cards.containsKey("blaze")) {
 
-            if(target.getFireTimer() == 0){
-                if (passCheck(HowManyCards(player,"blaze"),0.01f)){
+            System.out.println(target.getFireTimer() );
+            if(target.getFireTimer() == -1){
+                if (passCheck(HowManyCards(player,"blaze"),1f)){
                     target.setFire(5);
                 }
             }else {

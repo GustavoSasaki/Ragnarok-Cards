@@ -8,7 +8,7 @@ updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards/raw/master/update
 
 [[mods]]
 modId="ragnarok_cards"
-version="1.16.4-0.0.2"
+version="1.16.4-0.0.3"
 displayName="Ragnarok Cards"
 
 updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards"

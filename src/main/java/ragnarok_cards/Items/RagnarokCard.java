@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ragnarok_cards.RegisterEventsItems.GLM;
+import static ragnarok_cards.RagnarokCards.GLM;
 
 public class RagnarokCard extends Item {
     String cardName;

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
+import static ragnarok_cards.Config.mapDropRate;
 import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
 import static ragnarok_cards.Utils.VerificateCards.passCheck;
 
@@ -53,6 +54,7 @@ public class SecundaryEffectsAttack {
         }
 
         if(!source.isProjectile() && cards.containsKey("whiter_skeleton")) {
+            System.out.println(mapDropRate.get("zombie").get());
             if (passCheck("whiter_skeleton",cards)) {
                 //12seconds of poison
                 ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_WITHER_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);

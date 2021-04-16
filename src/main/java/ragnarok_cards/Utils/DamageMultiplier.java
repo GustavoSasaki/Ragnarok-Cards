@@ -18,6 +18,7 @@ import net.minecraft.util.SoundEvents;
 
 import java.util.Map;
 
+import static ragnarok_cards.Config.ZOMBIE;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 public class DamageMultiplier {
@@ -29,6 +30,7 @@ public class DamageMultiplier {
         float flatDamageBuff = 0;
 
         if(cards.containsKey("zombie") && target.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
+            System.out.println(ZOMBIE.get());
             multiplier *= 1 + 0.2 * cards.get("zombie");
         }
 

@@ -1,11 +1,11 @@
 {
-  "type": "ragnarok_cards:whiter_skeletoncard",
+  "type": "ragnarok_cards:whiter_skeleton_card",
   "conditions":
   [
     {
       "condition": "minecraft:entity_properties",
       "predicate": {
-        "type": "minecraft:whiter_skeleton"
+        "type": "minecraft:wither_skeleton"
       },
       "entity": "this"
     }

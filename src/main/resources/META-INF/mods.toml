@@ -16,7 +16,9 @@ displayURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="logo.png" #optional
 
-credits="Gustavo Sasaki (TheAgent00g)"
+credits='''Programmer:Gustavo Sasaki (TheAgent00g)
+Artist: trillium109
+'''
 #authors="Gustavo Sasaki (TheAgent00g)" #optional
 description='''
 This mod adds the Ragnarok Cards, they are items, which when in the upper row of player inventory gives a variety of combat buffs and debuffs.

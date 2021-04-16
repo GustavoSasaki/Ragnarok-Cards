@@ -1,16 +1,22 @@
 package ragnarok_cards;
 
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import ragnarok_cards.Items.RagnarokBag;
+import ragnarok_cards.Items.RagnarokBagContainer;
 import ragnarok_cards.Items.RagnarokCard;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import ragnarok_cards.Items.LootModifiers;
+import ragnarok_cards.Utils.RagnarokBagGUI;
 
 import java.util.Arrays;
 
@@ -28,7 +34,9 @@ public class RegisterEventsItems
 
 
     public RegisterEventsItems() {
+
         GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientStuff);
     }
 
     //implementados mas falta melhor sinalização
@@ -66,7 +74,7 @@ public class RegisterEventsItems
     public static final Item BLAZE_CARD = new RagnarokCard("blaze",
             Arrays.asList("Attacks have 1% chance to set enemy on fire for 5 seconds","Attacks have 30% to extend fire for 5 seconds"),
             "Extra 30% knockback under water");
-
+    public static final Item BLAZEe_CARD = new RagnarokBag("bage");
     //100 tested
 
     //todo axe hit destroy equiped wapon/armor
@@ -81,8 +89,21 @@ public class RegisterEventsItems
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(CAVE_SPIDER_CARD,CREEPER_CARD,OCELOT_CARD,PHANTOM_CARD,PIG_CARD,PIGLIN_CARD,
                 SHEEP_CARD,SKELETON_CARD,SNOWMAN_CARD,SPIDER_CARD,WHITER_SKELETON_CARD,WITCH_CARD,WOLF_CARD,ZOMBIE_CARD,
-                ZOMBIE_PIGLIN_CARD,BLAZE_CARD);
+                ZOMBIE_PIGLIN_CARD,BLAZE_CARD,BLAZEe_CARD);
     }
 
+
+    private void clientStuff(final FMLClientSetupEvent event) {
+        ScreenManager.registerFactory(RagnarokBagContainer.type, RagnarokBagGUI::new);
+    }
+
+
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> containerRegistryEvent) {
+            containerRegistryEvent.getRegistry().register(RagnarokBagContainer.type);
+        }
+    }
 
 }

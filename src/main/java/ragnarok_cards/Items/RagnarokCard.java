@@ -11,6 +11,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import org.lwjgl.glfw.GLFW;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
@@ -94,5 +95,4 @@ public class RagnarokCard extends Item {
         }
         return ActionResult.resultPass(playerIn.getHeldItem(handIn));
     }
-
 }

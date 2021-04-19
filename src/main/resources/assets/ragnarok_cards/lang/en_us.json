@@ -14,5 +14,18 @@
 	"item.ragnarok_cards.wolf_card": "Wolf Card",
 	"item.ragnarok_cards.ocelot_card": "Ocelot Card",
 	"item.ragnarok_cards.whiter_skeleton_card": "Whiter Skeleton Card",
-	"item.ragnarok_cards.zombie_piglin_card": "Zombie Piglin Card"
+	"item.ragnarok_cards.zombie_piglin_card": "Zombie Piglin Card",
+
+
+
+	"advancement.ragnarok_cards.first_advancement.title":"IT'S TIME TO D UDUUDUDUDUDUEL",
+	"advancement.ragnarok_cards.first_advancement.description":"Get you first Ragnarok Card",
+	"advancement.ragnarok_cards.all_cards.title":"King of Games",
+	"advancement.ragnarok_cards.all_cards.description":"Get every Ragnarok Card",
+	"advancement.ragnarok_cards.nether_cards.title": "Hellish Cards",
+	"advancement.ragnarok_cards.nether_cards.description": "Get every Ragnarok Card from The Nether",
+	"advancement.ragnarok_cards.animal_cards.title": ":<",
+	"advancement.ragnarok_cards.animal_cards.description": "Get every Ragnarok Card from passive mobs",
+	"advancement.ragnarok_cards.monster_cards.title": "For the good of humanity",
+	"advancement.ragnarok_cards.monster_cards.description": "Get every Ragnarok Card from overworld monsters"
 }

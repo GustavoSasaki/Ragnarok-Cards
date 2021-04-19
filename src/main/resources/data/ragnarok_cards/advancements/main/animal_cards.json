@@ -1,0 +1,71 @@
+{
+  "display": {
+    "icon": {
+      "item": "ragnarok_cards:wolf_card"
+    },
+    "title": {
+      "translate": "advancement.ragnarok_cards.animal_cards.title"
+    },
+    "description": {
+      "translate": "advancement.ragnarok_cards.animal_cards.description"
+    },
+    "frame": "goal"
+  },
+  "hidden": false,
+  "parent": "ragnarok_cards:main/first_advancement",
+  "criteria": {
+    "wolf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:wolf_card"
+          }
+        ]
+      }
+    },
+    "snow_golem": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:snow_golem_card"
+          }
+        ]
+      }
+    },
+    "sheep": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:sheep_card"
+          }
+        ]
+      }
+    },
+    "pig": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:pig_card"
+          }
+        ]
+      }
+    },
+    "ocelot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:ocelot_card"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

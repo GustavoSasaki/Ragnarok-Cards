@@ -1,0 +1,61 @@
+{
+  "display": {
+    "icon": {
+      "item": "ragnarok_cards:whiter_skeleton_card"
+    },
+    "title": {
+      "translate": "advancement.ragnarok_cards.nether_cards.title"
+    },
+    "description": {
+      "translate": "advancement.ragnarok_cards.nether_cards.description"
+    },
+    "frame": "goal"
+  },
+  "hidden": false,
+  "parent": "ragnarok_cards:main/first_advancement",
+  "criteria": {
+    "zombie_piglin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:zombie_piglin_card"
+          }
+        ]
+      }
+    },
+    "whiter_skeleton": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:whiter_skeleton_card"
+          }
+        ]
+      }
+    },
+    "piglin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:piglin_card"
+          }
+        ]
+      }
+    },
+    "blaze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:blaze_card"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

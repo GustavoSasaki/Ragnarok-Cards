@@ -1,0 +1,91 @@
+{
+  "display": {
+    "icon": {
+      "item": "ragnarok_cards:skeleton_card"
+    },
+    "title": {
+      "translate": "advancement.ragnarok_cards.monster_cards.title"
+    },
+    "description": {
+      "translate": "advancement.ragnarok_cards.monster_cards.description"
+    },
+    "frame": "goal"
+  },
+  "hidden": false,
+  "parent": "ragnarok_cards:main/first_advancement",
+  "criteria": {
+    "zombie": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:zombie_card"
+          }
+        ]
+      }
+    },
+    "witch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:witch_card"
+          }
+        ]
+      }
+    },
+    "skeleton": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:skeleton_card"
+          }
+        ]
+      }
+    },
+    "phantom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:phantom_card"
+          }
+        ]
+      }
+    },
+    "creeper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:creeper_card"
+          }
+        ]
+      }
+    },
+    "cave_spider": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:cave_spider_card"
+          }
+        ]
+      }
+    },
+    "spider": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:spider_card"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 10
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "display": {
+    "icon": {
+      "item": "ragnarok_cards:zombie_card"
+    },
+    "title": {
+      "translate": "advancement.ragnarok_cards.first_advancement.title"
+    },
+    "description": {
+      "translate": "advancement.ragnarok_cards.first_advancement.description"
+    }
+  },
+  "hidden": false,
+  "frame": "challenge",
+  "parent": "minecraft:story/root",
+  "criteria": {
+    "zombie": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:zombie_card"
+          }
+        ]
+      }
+    },
+    "zombie_piglin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:zombie_piglin_card"
+          }
+        ]
+      }
+    },
+    "wolf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:wolf_card"
+          }
+        ]
+      }
+    },
+    "witch": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:witch_card"
+          }
+        ]
+      }
+    },
+    "whiter_skeleton": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:whiter_skeleton_card"
+          }
+        ]
+      }
+    },
+    "spider": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:spider_card"
+          }
+        ]
+      }
+    },
+    "snow_golem": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:snow_golem_card"
+          }
+        ]
+      }
+    },
+    "skeleton": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:skeleton_card"
+          }
+        ]
+      }
+    },
+    "sheep": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:sheep_card"
+          }
+        ]
+      }
+    },
+    "piglin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:piglin_card"
+          }
+        ]
+      }
+    },
+    "pig": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:pig_card"
+          }
+        ]
+      }
+    },
+    "phantom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:phantom_card"
+          }
+        ]
+      }
+    },
+    "ocelot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:ocelot_card"
+          }
+        ]
+      }
+    },
+    "creeper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:creeper_card"
+          }
+        ]
+      }
+    },
+    "cave_spider": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:cave_spider_card"
+          }
+        ]
+      }
+    },
+    "blaze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "ragnarok_cards:blaze_card"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "zombie_piglin",
+      "zombie",
+      "wolf",
+      "witch",
+      "whiter_skeleton",
+      "spider",
+      "snow_golem",
+      "skeleton",
+      "sheep",
+      "piglin",
+      "pig",
+      "phantom",
+      "ocelot",
+      "creeper",
+      "cave_spider",
+      "blaze"
+    ]
+  ]
+}

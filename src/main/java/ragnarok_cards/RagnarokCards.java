@@ -30,20 +30,13 @@ public class RagnarokCards
 
     public RagnarokCards() {
 
+        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
         GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,Config.CLIENT_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER,Config.SERVER_CONFIG);
     }
 
-
-
-
-    @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(CAVE_SPIDER_CARD,CREEPER_CARD,OCELOT_CARD,PHANTOM_CARD,PIG_CARD,PIGLIN_CARD,
-                SHEEP_CARD,SKELETON_CARD,SNOWMAN_CARD,SPIDER_CARD,WHITER_SKELETON_CARD,WITCH_CARD,WOLF_CARD,ZOMBIE_CARD,
-                ZOMBIE_PIGLIN_CARD,BLAZE_CARD);
-    }
 
 }

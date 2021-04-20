@@ -2,16 +2,21 @@ package ragnarok_cards.Utils;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.RegistryObject;
+
 import java.util.ArrayList;
 import java.util.Map;
 
 
 import static ragnarok_cards.Config.mapDropRate;
+import static ragnarok_cards.RegisterItems.ITEMS;
 import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
 import static ragnarok_cards.Utils.VerificateCards.passCheck;
 
@@ -51,6 +56,7 @@ public class SecundaryEffectsAttack {
                 target.addPotionEffect(new EffectInstance(Effects.POISON, 1000 + curSlowTime));
                 ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_SPIDER_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
             }
+
         }
 
         if(!source.isProjectile() && cards.containsKey("whiter_skeleton")) {

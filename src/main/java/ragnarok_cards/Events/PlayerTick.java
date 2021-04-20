@@ -10,10 +10,10 @@ import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+//@Mod.EventBusSubscriber(Dist.CLIENT)
 public class PlayerTick {
 
-    @SubscribeEvent
+//    @SubscribeEvent
     public static void playerTick(TickEvent.PlayerTickEvent event) {
         if(event.player.world.isRemote()){
             return;

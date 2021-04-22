@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static ragnarok_cards.Utils.VerificateCards.*;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class ShootingEvents {
 
 
@@ -55,7 +55,6 @@ public class ShootingEvents {
                 curSlowTime = ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
             }
 
-            System.out.println(curSlowTime);
             //3seconds of slow
             ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500 + curSlowTime));
         }

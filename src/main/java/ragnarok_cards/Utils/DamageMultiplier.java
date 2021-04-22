@@ -19,6 +19,8 @@ import net.minecraft.util.SoundEvents;
 import java.util.Map;
 
 import static ragnarok_cards.Config.ZOMBIE;
+import static ragnarok_cards.RagnarokCards.MOD_ID;
+import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 public class DamageMultiplier {
@@ -96,8 +98,9 @@ public class DamageMultiplier {
     // bonus attack when player consecutively hitting same type of enemy
     private static float ApplySkeletonCard(PlayerEntity player,LivingEntity target, float multiplier,Map<String, Integer> cards){
         if(cards.containsKey("skeleton")) {
-            System.out.println(multiplier);
-            CompoundNBT nbt = player.getPersistentData();
+
+            CompoundNBT persistant_nbt = getNbtSafe(player.getPersistentData(),player.PERSISTED_NBT_TAG);
+            CompoundNBT nbt = getNbtSafe(persistant_nbt,MOD_ID);
 
             if (!nbt.contains("lastTypeEnemyHitten")){
                 nbt.putString("lastTypeEnemyHitten","none");

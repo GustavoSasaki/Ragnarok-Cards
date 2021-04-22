@@ -20,7 +20,7 @@ import java.util.Random;
 
 import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class EatFood {
     private interface ApplyEffect{
         public EffectInstance apply();

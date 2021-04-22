@@ -15,7 +15,7 @@ import static ragnarok_cards.Utils.DamageMultiplier.ApplyDamageMultiplier;
 import static ragnarok_cards.Utils.DefenseMultiplier.ApplyDefenseMultiplier;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class GenericDamageEvents {
 
     @SubscribeEvent

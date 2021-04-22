@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
 import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class FallDamage {
 
     @SubscribeEvent

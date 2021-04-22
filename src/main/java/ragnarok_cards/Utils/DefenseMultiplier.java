@@ -17,6 +17,8 @@ import ragnarok_cards.Items.RagnarokCard;
 
 import java.util.Map;
 
+import static ragnarok_cards.RagnarokCards.MOD_ID;
+import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 public class DefenseMultiplier {
@@ -31,27 +33,28 @@ public class DefenseMultiplier {
         double posY = player.getPosY();
         double posZ = player.getPosZ();
 
-        //if(source.isExplosion()){
-        //    if(cards.containsKey("creeper")) {
-        //        CompoundNBT nbt = player.getPersistentData();
-        //        Long currentTime = player.world.getGameTime();
+        if(source.isExplosion()){
+            if(cards.containsKey("creeper")) {
+                CompoundNBT nbt_persistant = getNbtSafe(player.getPersistentData(),player.PERSISTED_NBT_TAG);
+                CompoundNBT nbt = getNbtSafe(nbt_persistant,MOD_ID);
+                Long currentTime = player.world.getGameTime();
 
-       //         if(nbt.contains("creeperCardPlayerExplode") && nbt.getBoolean("creeperCardPlayerExplode")){
-        //            nbt.putBoolean("creeperCardPlayerExplode",false);
-        //            reduceToMin = true;
-        //        }
-         //       else if (passCheck("creeper", cards)) {
-         //           if(!(nbt.contains("creeperCardActivate")) || 100 < currentTime- nbt.getLong("creeperCardActivate")){
-        //                reduceToMin = true;
-        //                nbt.putLong("creeperCardActivate",currentTime);
-        //                nbt.putBoolean("creeperCardPlayerExplode",true);
-         //               attacker.world.playSound((PlayerEntity)null, posX, posY, posZ , SoundEvents.ENTITY_CREEPER_HURT, player.getSoundCategory(), 1.0F, 3.0F);
+                if(nbt.contains("creeperCardPlayerExplode") && nbt.getBoolean("creeperCardPlayerExplode")){
+                    nbt.putBoolean("creeperCardPlayerExplode",false);
+                    reduceToMin = true;
+                }
+                else if (passCheck("creeper", cards)) {
+                    if(!(nbt.contains("creeperCardActivate")) || 1000 < currentTime- nbt.getLong("creeperCardActivate")){
+                        reduceToMin = true;
+                        nbt.putLong("creeperCardActivate",currentTime);
+                        nbt.putBoolean("creeperCardPlayerExplode",true);
+                        attacker.world.playSound((PlayerEntity)null, posX, posY, posZ , SoundEvents.ENTITY_CREEPER_HURT, player.getSoundCategory(), 1.0F, 3.0F);
 //
-         //           }
-         //       }
+                    }
+                }
 
-         //   }
-       // }
+            }
+         }
 
         if(cards.containsKey("zombie_piglin")) {
             if (passCheck(cards.get("zombie_piglin"), cardNameToChance.get("zombie_piglin")/2)) {

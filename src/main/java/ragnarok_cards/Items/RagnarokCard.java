@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static ragnarok_cards.Config.ALL_CARDS_MAX_STACK;
 import static ragnarok_cards.RagnarokCards.GLM;
 
 public class RagnarokCard extends Item {
@@ -33,7 +34,7 @@ public class RagnarokCard extends Item {
 
     //this constructor will always activate
     public RagnarokCard(String cardName,int quantityBuffs,int quantityDebuffs) {
-        super(new Item.Properties().maxStackSize(1).group(ItemGroup.COMBAT).maxStackSize(8));
+        super(new Item.Properties().maxStackSize(ALL_CARDS_MAX_STACK.get()).group(ItemGroup.COMBAT).maxStackSize(8));
 
         this.cardName = cardName;
         translationKeyBuffs = IntStream.range(0, quantityBuffs).

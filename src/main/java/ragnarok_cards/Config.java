@@ -22,7 +22,9 @@ public class Config {
         public static ForgeConfigSpec.IntValue ZOMBIE;
 
         public static Map<String, ForgeConfigSpec.IntValue> mapDropRate = new HashMap<String, ForgeConfigSpec.IntValue>();
-
+        public static ForgeConfigSpec.IntValue LOOT_BOX_COST;
+        public static ForgeConfigSpec.IntValue LOOT_BOX_MAX_STACK;
+        public static ForgeConfigSpec.IntValue ALL_CARDS_MAX_STACK;
 
         static{
 
@@ -34,12 +36,23 @@ public class Config {
             SERVER_BUILDER.push(CATEGORY_CARDS);
 
 
+            ALL_CARDS_MAX_STACK= SERVER_BUILDER.comment("Stack up to")
+                    .defineInRange("max_stack", 8, 1, 64);
+
             for (String cardName : cardNames){
                 SERVER_BUILDER.push(cardName);
                 mapDropRate.put(cardName, SERVER_BUILDER.comment("drop rate of "+cardName)
                         .defineInRange("drop_rate", 100, 0, 100));
                 SERVER_BUILDER.pop();
             }
+
+
+            SERVER_BUILDER.push("loot_box");
+            LOOT_BOX_COST= SERVER_BUILDER.comment("How many card to make a loot box")
+                    .defineInRange("card_cost", 3, 1, 8);
+            LOOT_BOX_MAX_STACK= SERVER_BUILDER.comment("Stack up to")
+                    .defineInRange("max_stack", 16, 1, 64);
+            SERVER_BUILDER.pop();
 
 
             SERVER_BUILDER.pop();

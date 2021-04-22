@@ -16,12 +16,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ragnarok_cards.Config.LOOT_BOX_MAX_STACK;
 import static ragnarok_cards.RegisterItems.ITEMS;
 import static ragnarok_cards.RegisterItems.cardNames;
 
 public class LootBox extends Item {
     public LootBox( ) {
-        super(new Item.Properties().maxStackSize(16).group(ItemGroup.COMBAT));
+
+        super(new Item.Properties().maxStackSize(LOOT_BOX_MAX_STACK.get()).group(ItemGroup.COMBAT));
     }
 
     @Override
@@ -30,7 +32,7 @@ public class LootBox extends Item {
             return ActionResult.func_233538_a_(playerIn.getHeldItemMainhand(), worldIn.isRemote());
         }
 
-        // every time player pickup a new card, He gets the card nbt key
+        //getting all cards seen by the player
         CompoundNBT nbt = playerIn.getPersistentData();
         List<RagnarokCard> cards_seen = ITEMS.getEntries().stream().
                 filter(x -> nbt.contains(x.get().getRegistryName().toString()+"seen")).
@@ -43,7 +45,7 @@ public class LootBox extends Item {
             ItemStack stack = new ItemStack(cards_seen.get(randNumber).getItem());
 
             ItemEntity itementity = new ItemEntity(playerIn.world, playerIn.getPosX(), playerIn.getPosY() + 1, playerIn.getPosZ(), stack);
-            itementity.setDefaultPickupDelay();
+            itementity.setPickupDelay(20);
             if (playerIn.captureDrops() != null){
                 playerIn.captureDrops().add(itementity);
             }
@@ -51,6 +53,7 @@ public class LootBox extends Item {
                 playerIn.world.addEntity(itementity);
             }
 
+            //consuming the loot box
             playerIn.addStat(Stats.ITEM_USED.get(this));
             if (!playerIn.abilities.isCreativeMode) {
                 playerIn.getHeldItemMainhand().shrink(1);

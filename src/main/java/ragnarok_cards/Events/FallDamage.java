@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static ragnarok_cards.Config.*;
 import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
 import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
 
@@ -36,9 +37,9 @@ public class FallDamage {
         event.setDistance(event.getDistance() + pigCardDamage);
 
 
-        if(SingleCardActivate(player, "ocelot")) {
+        if(SingleCardActivate(player, "ocelot",OCELOT_CHANCE.get())) {
             event.setDistance( 5 );
-            player.addPotionEffect(new EffectInstance(Effects.SPEED, 30,4));
+            player.addPotionEffect(new EffectInstance(Effects.SPEED, OCELOT_SPEED_TIME.get(),4));
             ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_CAT_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
         }
     }

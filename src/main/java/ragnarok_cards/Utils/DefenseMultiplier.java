@@ -17,6 +17,7 @@ import ragnarok_cards.Items.RagnarokCard;
 
 import java.util.Map;
 
+import static ragnarok_cards.Config.*;
 import static ragnarok_cards.RagnarokCards.MOD_ID;
 import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 import static ragnarok_cards.Utils.VerificateCards.*;
@@ -57,25 +58,28 @@ public class DefenseMultiplier {
          }
 
         if(cards.containsKey("zombie_piglin")) {
-            if (passCheck(cards.get("zombie_piglin"), cardNameToChance.get("zombie_piglin")/2)) {
+            if (passCheck(cards.get("zombie_piglin"), ZOMBIE_PIGLIN_CHANCE_NEG.get())) {
 
+                multiplier *= ZOMBIE_PIGLIN_MULTIPLIER_NEG.get();
                 player.onCriticalHit(player);
                 player.onCriticalHit(player);
                 player.onCriticalHit(player);
                 player.onCriticalHit(player);
                 player.onCriticalHit(player);
-                multiplier *= 3;
             }
         }
 
         if(cards.containsKey("cave_spider") && attacker.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
-            flatDamageIncrease += 1 * cards.get("cave_spider");
-            player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 250,4));
+            flatDamageIncrease +=  cards.get("cave_spider") * CAVE_SPIDER_DAMAGE_NEG.get();
+            player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, CAVE_SPIDER_SLOW_TIME_NEG.get(),4));
         }
 
         if(cards.containsKey("piglin") && attacker.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            multiplier *= 1.2;
-            player.addPotionEffect(new EffectInstance(Effects.HUNGER, 250));
+            multiplier *= PIGLIN_MULTIPLIER_NEG.get();
+
+            if (passCheck(cards.get("piglin"), PIGLIN_CHANCE_NEG.get())) {
+                player.addPotionEffect(new EffectInstance(Effects.HUNGER, PIGLIN_TIME_NEG.get()));
+            }
         }
 
         if(cards.containsKey("phantom") && isEnderThing(attacker)){
@@ -83,11 +87,11 @@ public class DefenseMultiplier {
         }
 
         if(cards.containsKey("ocelot") && player.isInWater()) {
-            multiplier *= 1.2;
+            multiplier *= OCELOT_MULTIPLIER_NEG.get();
         }
 
         if(cards.containsKey("skeleton") && source.isFireDamage() ){
-            multiplier *= 1.2;
+            multiplier *= SKELETON_MULTIPLIER_NEG.get();
         }
 
         if(cards.containsKey("zombie") && attacker instanceof LlamaEntity) {

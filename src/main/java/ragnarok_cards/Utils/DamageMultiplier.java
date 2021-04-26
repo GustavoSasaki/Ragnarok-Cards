@@ -18,7 +18,7 @@ import net.minecraft.util.SoundEvents;
 
 import java.util.Map;
 
-import static ragnarok_cards.Config.ZOMBIE;
+import static ragnarok_cards.Config.*;
 import static ragnarok_cards.RagnarokCards.MOD_ID;
 import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 import static ragnarok_cards.Utils.VerificateCards.*;
@@ -32,7 +32,6 @@ public class DamageMultiplier {
         float flatDamageBuff = 0;
 
         if(cards.containsKey("zombie") && target.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            System.out.println(ZOMBIE.get());
             multiplier *= 1 + 0.2 * cards.get("zombie");
         }
 
@@ -65,8 +64,8 @@ public class DamageMultiplier {
         }
 
         if(cards.containsKey("zombie_piglin")) {
-            if (passCheck(cards.get("zombie_piglin").intValue(), cardNameToChance.get("zombie_piglin") )) {
-                multiplier *= 3;
+            if (passCheck(cards.get("zombie_piglin").intValue(), ZOMBIE_PIGLIN_CHANCE.get() )) {
+                multiplier *= ZOMBIE_PIGLIN_MULTIPLIER.get();
                 player.onCriticalHit(target);
                 player.onCriticalHit(target);
                 player.onCriticalHit(target);
@@ -78,8 +77,8 @@ public class DamageMultiplier {
         if(cards.containsKey("piglin")) {
             Item currItem = player.inventory.getCurrentItem().getItem();
 
-            if(currItem instanceof TieredItem && ((TieredItem)currItem).getTier().getAttackDamage() < 2){
-                flatDamageBuff += (int) (1.5 * cards.get("piglin"));
+            if(currItem instanceof TieredItem && ((TieredItem)currItem).getTier().getAttackDamage() < PIGLIN_MAX_TIER.get()){
+                flatDamageBuff += (int) (PIGLIN_DAMAGE.get() * cards.get("piglin"));
             }
         }
 
@@ -114,14 +113,13 @@ public class DamageMultiplier {
                 consecutivelyHits = nbt.getInt("consecutivelyHits");
                 consecutivelyHits += cards.get("skeleton");
 
-                multiplier += 0.02 * consecutivelyHits;
+                multiplier += consecutivelyHits * SKELETON_MULTIPLIER.get();
             }else{
                 consecutivelyHits = 1;
                 nbt.putString( "lastTypeEnemyHitten", target.getType().toString() );
             }
 
             nbt.putInt( "consecutivelyHits", consecutivelyHits);
-            System.out.println(multiplier);
         }
 
         return multiplier;

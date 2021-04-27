@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Map;
 
+import static ragnarok_cards.Config.*;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 @Mod.EventBusSubscriber()
@@ -48,15 +49,17 @@ public class ShootingEvents {
             return;
         }
 
-        if(SingleCardActivate(shooter, "snowman")) {
+        if(SingleCardActivate(shooter, "snowman",SNOW_GOLEM_CHANCE.get())) {
 
-            int curSlowTime = 0;
-            if( ((LivingEntity) target).isPotionActive(Effects.SLOWNESS)){
-                curSlowTime = ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
+            int curSlowTime = SNOW_GOLEM_TIME.get();
+            boolean slowed = ((LivingEntity) target).isPotionActive(Effects.SLOWNESS);
+            if(slowed){
+                curSlowTime += ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
             }
 
-            //3seconds of slow
-            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500 + curSlowTime));
+            if(!(SNOW_GOLEM_STACK.get() && slowed)) {
+                ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, curSlowTime,SNOW_GOLEM_POWER.get()));
+            }
         }
 
     }

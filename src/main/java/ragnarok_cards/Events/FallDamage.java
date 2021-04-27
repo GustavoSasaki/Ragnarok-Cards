@@ -32,8 +32,7 @@ public class FallDamage {
         }
         PlayerEntity player = (PlayerEntity) entity;
 
-
-        int pigCardDamage = (int) ((event.getDistance()-3) * 0.2 * HowManyCards(player,"pig"));
+        int pigCardDamage = (int) ((event.getDistance()-3) * PIG_MULTIPLIER.get() * HowManyCards(player,"pig"));
         event.setDistance(event.getDistance() + pigCardDamage);
 
 

@@ -47,6 +47,19 @@ public class Config {
 
         public static ForgeConfigSpec.DoubleValue SKELETON_MULTIPLIER;
         public static ForgeConfigSpec.DoubleValue SKELETON_MULTIPLIER_NEG;
+
+        public static ForgeConfigSpec.DoubleValue WOLF_DAMAGE;
+        public static ForgeConfigSpec.DoubleValue WOLF_CHANCE;
+        public static ForgeConfigSpec.DoubleValue WOLF_MULTIPLIER_NEG;
+
+        public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER;
+        public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER_NEG;
+
+
+        public static ForgeConfigSpec.DoubleValue SNOW_GOLEM_CHANCE;
+        public static ForgeConfigSpec.IntValue SNOW_GOLEM_TIME;
+        public static ForgeConfigSpec.BooleanValue SNOW_GOLEM_STACK;
+        public static ForgeConfigSpec.IntValue SNOW_GOLEM_POWER;
         static{
 
             ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -117,6 +130,33 @@ public class Config {
                     defineInRange("multiplier", 0.02, 0, 10);
             SKELETON_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier of fire damage dealt to the player").
                     defineInRange("multiplier_neg", 0.2, 0, 10);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("wolf");
+            WOLF_DAMAGE = SERVER_BUILDER.comment("extra flat damage when tamed pets attack").
+                    defineInRange("damage", 1f, 0, 10);
+            WOLF_CHANCE = SERVER_BUILDER.comment("chance of tamed pets have damage reduce to 1").
+                    defineInRange("chance", 0.2, 0, 1);
+            WOLF_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier apply to attacks against the player ").
+                    defineInRange("multiplier_neg", 0.1, 0, 10);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("pig");
+            PIG_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier apply against Pig Type enemies").
+                    defineInRange("multiplier", 0.25f, 0, 1);
+            PIG_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier when player receive fall damage").
+                    defineInRange("multiplier_neg", 0.15f, 0, 1);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("snow_golem");
+            SNOW_GOLEM_CHANCE = SERVER_BUILDER.comment("chance apply slow with snow balls").
+                    defineInRange("chance", 0.05f, 0, 1);
+            SNOW_GOLEM_TIME = SERVER_BUILDER.comment("how much ticks for the slow applied").
+                    defineInRange("time", 100, 0, 20000);
+            SNOW_GOLEM_STACK = SERVER_BUILDER.comment("activate even if enemy already slowed").
+                    define("stack",true);
+            SNOW_GOLEM_POWER = SERVER_BUILDER.comment("how powerful is the slow").
+                    defineInRange("power", 1, 0, 10);
             SERVER_BUILDER.pop();
 
             //getting drop rates

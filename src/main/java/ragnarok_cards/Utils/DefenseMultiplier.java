@@ -50,7 +50,7 @@ public class DefenseMultiplier {
                         nbt.putLong("creeperCardActivate",currentTime);
                         nbt.putBoolean("creeperCardPlayerExplode",true);
                         attacker.world.playSound((PlayerEntity)null, posX, posY, posZ , SoundEvents.ENTITY_CREEPER_HURT, player.getSoundCategory(), 1.0F, 3.0F);
-//
+
                     }
                 }
 
@@ -81,7 +81,6 @@ public class DefenseMultiplier {
                 player.addPotionEffect(new EffectInstance(Effects.HUNGER, PIGLIN_TIME_NEG.get()));
             }
         }
-
         if(cards.containsKey("phantom") && isEnderThing(attacker)){
             multiplier *= 1.15;
         }
@@ -101,10 +100,8 @@ public class DefenseMultiplier {
         if(cards.containsKey("whiter_skeleton") && source.isExplosion()) {
             multiplier *= 1.3;
         }
-
         if(cards.containsKey("wolf")) {
-            multiplier += 0.1*cards.get("wolf");
-            System.out.print("WOLF DEFENE");
+            multiplier += cards.get("wolf") * WOLF_MULTIPLIER_NEG.get();
         }
 
         if(reduceToMin){

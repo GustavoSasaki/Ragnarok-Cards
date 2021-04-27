@@ -51,7 +51,7 @@ public class DamageMultiplier {
         }
 
         if(cards.containsKey("pig") && ( target instanceof PigEntity || target instanceof AbstractPiglinEntity )) {
-            multiplier *= 1 + 0.25 * cards.get("pig");
+            multiplier *= 1 + cards.get("pig") * PIG_MULTIPLIER_NEG.get();
         }
 
         if(cards.containsKey("whiter_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {

@@ -77,7 +77,7 @@ public class DefenseMultiplier {
             }
         }
         if(cards.containsKey("phantom") && isEnderThing(attacker)){
-            multiplier *= 1.15;
+            multiplier *= 1 + PHANTOM_MULTIPLIER_NEG.get() * cards.get("phantom");
         }
 
         if(cards.containsKey("ocelot") && player.isInWater()) {

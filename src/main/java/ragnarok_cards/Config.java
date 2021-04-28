@@ -1,20 +1,26 @@
 package ragnarok_cards;
 
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
+import static ragnarok_cards.RagnarokCards.MOD_ID;
 import static ragnarok_cards.RegisterItems.cardNames;
 
 @Mod.EventBusSubscriber
 public class Config {
 
-        public static final String CATEGORY_CARDS = "cards";
-        public static final String SUB_CATEGORY_CARDS = "drop_rate";
+        public static final String CATEGORY_CARDS = MOD_ID;
 
         public static ForgeConfigSpec SERVER_CONFIG;
         public static ForgeConfigSpec CLIENT_CONFIG;
@@ -52,6 +58,25 @@ public class Config {
         public static ForgeConfigSpec.DoubleValue WOLF_CHANCE;
         public static ForgeConfigSpec.DoubleValue WOLF_MULTIPLIER_NEG;
 
+        public static ForgeConfigSpec.DoubleValue SHEEP_MULTIPLIER;
+        public static ForgeConfigSpec.IntValue SHEEP_CHANCE_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_TIME;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_POWER;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_TIME_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_POWER_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_NEG;
+
+        class configPotion{
+            public int time;
+            public int power;
+            public String name;
+            configPotion(int time, int power, String name){
+                this.time = time;
+                this.power = power;
+                this.name = name;
+            }
+        }
         public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER;
         public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER_NEG;
 
@@ -59,6 +84,13 @@ public class Config {
         public static ForgeConfigSpec.IntValue SNOW_GOLEM_TIME;
         public static ForgeConfigSpec.BooleanValue SNOW_GOLEM_STACK;
         public static ForgeConfigSpec.IntValue SNOW_GOLEM_POWER;
+
+        public static ForgeConfigSpec.DoubleValue SPIDER_DAMAGE;
+        public static ForgeConfigSpec.IntValue SPIDER_TIME;
+        public static ForgeConfigSpec.IntValue SPIDER_POWER;
+
+        public static ForgeConfigSpec.DoubleValue PHANTOM_MULTIPLIER;
+        public static ForgeConfigSpec.DoubleValue PHANTOM_MULTIPLIER_NEG;
 
         public static ForgeConfigSpec.DoubleValue ZOMBIE_MULTIPLIER;
         public static ForgeConfigSpec.DoubleValue ZOMBIE_MULTIPLIER_NEG;
@@ -73,6 +105,7 @@ public class Config {
         public static ForgeConfigSpec.IntValue BLAZE_TIME1;
         public static ForgeConfigSpec.IntValue BLAZE_TIME2;
         public static ForgeConfigSpec.DoubleValue BLAZE_KNOCKBACK_NEG;
+
 
         static{
 
@@ -155,6 +188,32 @@ public class Config {
                     defineInRange("multiplier_neg", 0.1, 0, 10);
             SERVER_BUILDER.pop();
 
+            SERVER_BUILDER.push("sheep");
+            SHEEP_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier apply against animals").
+                    defineInRange("multiplier", 0.25f, 0, 5);
+            SHEEP_CHANCE_NEG = SERVER_BUILDER.comment("chance of apply negative effects when eating meat").
+                    defineInRange("chance_neg", 2, 0, 100);
+
+            SERVER_BUILDER.comment("apply one of this effects when eating meat and dont pass the negative check");
+            SHEEP_EFFECT = SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
+                    defineList("effect",
+                            Arrays.asList(1, 5, 10, 11, 12, 3, 13, 16, 26),
+                            x -> true);
+            SHEEP_EFFECT_POWER= SERVER_BUILDER.defineList("effect_power", Arrays.asList(2,2,2,2,2,2,2,2,2),
+                    x -> ((Integer)x).intValue() > 0);
+            SHEEP_EFFECT_TIME = SERVER_BUILDER.defineList("effect_time", Arrays.asList(200,200,200,200,200,200,200,600,600),
+                    x -> ((Integer)x).intValue() > 0);
+            SERVER_BUILDER.comment("apply all of this effects when eating meat and pass the negative check");
+            SHEEP_EFFECT_NEG = SERVER_BUILDER.defineList("effect_neg",
+                    Arrays.asList(15, 2, 19, 18),
+                    x -> true);
+            SHEEP_EFFECT_POWER_NEG = SERVER_BUILDER.defineList("power_neg", Arrays.asList(1,1,1,1),x -> ((Integer)x).intValue() > 0);
+            SHEEP_EFFECT_TIME_NEG = SERVER_BUILDER.defineList("effect_time_neg", Arrays.asList(100,1000,1000,200),x -> ((Integer)x).intValue() > 0);
+
+
+
+            SERVER_BUILDER.pop();
+
             SERVER_BUILDER.push("pig");
             PIG_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier apply against Pig Type enemies").
                     defineInRange("multiplier", 0.25f, 0, 1);
@@ -171,6 +230,22 @@ public class Config {
                     define("stack",true);
             SNOW_GOLEM_POWER = SERVER_BUILDER.comment("how powerful is the slow").
                     defineInRange("power", 1, 0, 10);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("spider");
+            SPIDER_DAMAGE = SERVER_BUILDER.comment("flat damage increase against arthropod").
+                    defineInRange("damage", 0.25f, 0, 5);
+            SPIDER_TIME = SERVER_BUILDER.comment("apply how much ticks of slow when attacking arthropods").
+                    defineInRange("time", 100, 0, 20000);
+            SPIDER_POWER = SERVER_BUILDER.comment("how powerfull is the slow").
+                    defineInRange("power", 4, 1, 10);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("phantom");
+            PHANTOM_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier against flying enemies").
+                    defineInRange("multiplier", 0.25f, 0, 5);
+            PHANTOM_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier when player hit by The End Mobs").
+                    defineInRange("multiplier_neg", 0.15f, 0, 5);
             SERVER_BUILDER.pop();
 
 

@@ -40,14 +40,13 @@ public class DamageMultiplier {
         }
 
         if(cards.containsKey("spider") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
-            multiplier *= 1 + 0.25 * cards.get("spider");
+            multiplier *= 1 + cards.get("spider") * SPIDER_DAMAGE.get();
 
-            //add slow for 1.5s
-            target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 250,4));
+            target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, SPIDER_TIME.get(),SPIDER_POWER.get()));
         }
 
         if(cards.containsKey("phantom") && isFlyingThing(target)) {
-            multiplier *= 1 + 0.25 * cards.get("phantom");
+            multiplier *= 1 +  cards.get("phantom") * PHANTOM_MULTIPLIER.get();
         }
 
         if(cards.containsKey("pig") && ( target instanceof PigEntity || target instanceof AbstractPiglinEntity )) {

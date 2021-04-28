@@ -32,7 +32,7 @@ public class DamageMultiplier {
         float flatDamageBuff = 0;
 
         if(cards.containsKey("zombie") && target.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            multiplier *= 1 + 0.2 * cards.get("zombie");
+            multiplier *= 1 + cards.get("zombie") * ZOMBIE_MULTIPLIER.get();
         }
 
         if(cards.containsKey("sheep") && target instanceof AnimalEntity) {
@@ -55,7 +55,7 @@ public class DamageMultiplier {
         }
 
         if(cards.containsKey("whiter_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {
-            multiplier *= 1 + 0.5 * cards.get("whiter_skeleton");
+            multiplier *= 1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
         }
 
         if(source.isProjectile() && cards.containsKey("witch")) {

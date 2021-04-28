@@ -1,19 +1,14 @@
 package ragnarok_cards.Utils;
 
 import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.horse.LlamaEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.Explosion;
-import ragnarok_cards.Items.RagnarokCard;
 
 import java.util.Map;
 
@@ -75,7 +70,7 @@ public class DefenseMultiplier {
         }
 
         if(cards.containsKey("piglin") && attacker.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            multiplier *= PIGLIN_MULTIPLIER_NEG.get();
+            multiplier *= (1 + PIGLIN_MULTIPLIER_NEG.get() * cards.get("piglin")  );
 
             if (passCheck(cards.get("piglin"), PIGLIN_CHANCE_NEG.get())) {
                 player.addPotionEffect(new EffectInstance(Effects.HUNGER, PIGLIN_TIME_NEG.get()));
@@ -86,22 +81,22 @@ public class DefenseMultiplier {
         }
 
         if(cards.containsKey("ocelot") && player.isInWater()) {
-            multiplier *= OCELOT_MULTIPLIER_NEG.get();
+            multiplier *= (1 + OCELOT_MULTIPLIER_NEG.get() * cards.get("ocelot")  );
         }
 
         if(cards.containsKey("skeleton") && source.isFireDamage() ){
-            multiplier *= SKELETON_MULTIPLIER_NEG.get();
+            multiplier *= (1 + SKELETON_MULTIPLIER_NEG.get() * cards.get("skeleton") );
         }
 
         if(cards.containsKey("zombie") && attacker instanceof LlamaEntity) {
-            multiplier *= 4;
+            multiplier *= ZOMBIE_MULTIPLIER_NEG.get() * cards.get("zombie");
         }
 
         if(cards.containsKey("whiter_skeleton") && source.isExplosion()) {
-            multiplier *= 1.3;
+            multiplier *= (1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get());
         }
         if(cards.containsKey("wolf")) {
-            multiplier += cards.get("wolf") * WOLF_MULTIPLIER_NEG.get();
+            multiplier *= (1 + cards.get("wolf") * WOLF_MULTIPLIER_NEG.get() );
         }
 
         if(reduceToMin){

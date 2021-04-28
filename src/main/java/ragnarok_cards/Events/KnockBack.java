@@ -7,6 +7,7 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static ragnarok_cards.Config.BLAZE_KNOCKBACK_NEG;
 import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
 import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
 
@@ -22,7 +23,8 @@ public class KnockBack {
         PlayerEntity player = (PlayerEntity) event.getEntity();
 
         if(player.isInWater()) {
-            event.setStrength(event.getStrength() + (0.3f * HowManyCards(player, "blaze")));
+            float extraKnockBack = (float) (HowManyCards(player, "blaze") * BLAZE_KNOCKBACK_NEG.get());
+            event.setStrength(event.getStrength() * (1+extraKnockBack));
         }
     }
 }

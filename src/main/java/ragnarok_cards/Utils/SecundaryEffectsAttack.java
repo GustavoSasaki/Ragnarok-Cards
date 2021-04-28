@@ -50,7 +50,7 @@ public class SecundaryEffectsAttack {
                 }
 
                 if( !(CAVE_SPIDER_STACK.get() && target.isPotionActive(Effects.POISON) )) {
-                    //6seconds of poison
+
                     target.addPotionEffect(new EffectInstance(Effects.POISON, 20 * CAVE_SPIDER_POISON_TIME.get() + curSlowTime));
                     ((ServerWorld) player.world).playSound((PlayerEntity) null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_SPIDER_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
                 }
@@ -59,11 +59,11 @@ public class SecundaryEffectsAttack {
         }
 
         if(!source.isProjectile() && cards.containsKey("whiter_skeleton")) {
-            System.out.println(mapDropRate.get("zombie").get());
-            if (passCheck("whiter_skeleton",cards)) {
+
+            if (passCheck( cards.get("whiter_skeleton"), WITHER_SKELETON_CHANCE.get())) {
                 //12seconds of poison
                 ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_WITHER_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
-                target.addPotionEffect(new EffectInstance(Effects.WITHER, 250));
+                target.addPotionEffect(new EffectInstance(Effects.WITHER, WITHER_SKELETON_TIME.get()));
             }
         }
 
@@ -78,22 +78,19 @@ public class SecundaryEffectsAttack {
 
         if(cards.containsKey("blaze")) {
 
-            System.out.println(target.getFireTimer() );
             if(target.getFireTimer() == -1){
-                if (passCheck(HowManyCards(player,"blaze"),1f)){
-                    target.setFire(5);
+                if (passCheck(cards.get("blaze"),BLAZE_CHANCE1.get())){
+                    target.setFire( BLAZE_TIME1.get() );
                 }
             }else {
-                if (passCheck("blaze", cards)) {
+                if (passCheck(cards.get("blaze"),BLAZE_CHANCE2.get())){
 
-                    target.setFire(target.getFireTimer() + 5);
+                    target.setFire(target.getFireTimer() + BLAZE_TIME2.get() );
                     ((ServerWorld) player.world).playSound((PlayerEntity) null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_BLAZE_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
                 }
             }
         }
-        //if(cards.containsKey("vindicator") && source.){
 
-        //}
     }
 
     private static void applyRandomEffect(LivingEntity entity){

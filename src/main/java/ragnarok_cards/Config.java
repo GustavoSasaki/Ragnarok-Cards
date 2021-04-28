@@ -55,11 +55,25 @@ public class Config {
         public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER;
         public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER_NEG;
 
-
-        public static ForgeConfigSpec.DoubleValue SNOW_GOLEM_CHANCE;
+        public static ForgeConfigSpec.IntValue SNOW_GOLEM_CHANCE;
         public static ForgeConfigSpec.IntValue SNOW_GOLEM_TIME;
         public static ForgeConfigSpec.BooleanValue SNOW_GOLEM_STACK;
         public static ForgeConfigSpec.IntValue SNOW_GOLEM_POWER;
+
+        public static ForgeConfigSpec.DoubleValue ZOMBIE_MULTIPLIER;
+        public static ForgeConfigSpec.DoubleValue ZOMBIE_MULTIPLIER_NEG;
+
+        public static ForgeConfigSpec.IntValue WITHER_SKELETON_CHANCE;
+        public static ForgeConfigSpec.DoubleValue WITHER_SKELETON_MULTIPLIER;
+        public static ForgeConfigSpec.IntValue WITHER_SKELETON_TIME;
+        public static ForgeConfigSpec.DoubleValue WITHER_SKELETON_MULTIPLIER_NEG;
+
+        public static ForgeConfigSpec.IntValue BLAZE_CHANCE1;
+        public static ForgeConfigSpec.IntValue BLAZE_CHANCE2;
+        public static ForgeConfigSpec.IntValue BLAZE_TIME1;
+        public static ForgeConfigSpec.IntValue BLAZE_TIME2;
+        public static ForgeConfigSpec.DoubleValue BLAZE_KNOCKBACK_NEG;
+
         static{
 
             ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -150,13 +164,46 @@ public class Config {
 
             SERVER_BUILDER.push("snow_golem");
             SNOW_GOLEM_CHANCE = SERVER_BUILDER.comment("chance apply slow with snow balls").
-                    defineInRange("chance", 0.05f, 0, 1);
+                    defineInRange("chance", 5, 0, 1);
             SNOW_GOLEM_TIME = SERVER_BUILDER.comment("how much ticks for the slow applied").
                     defineInRange("time", 100, 0, 20000);
             SNOW_GOLEM_STACK = SERVER_BUILDER.comment("activate even if enemy already slowed").
                     define("stack",true);
             SNOW_GOLEM_POWER = SERVER_BUILDER.comment("how powerful is the slow").
                     defineInRange("power", 1, 0, 10);
+            SERVER_BUILDER.pop();
+
+
+            SERVER_BUILDER.push("zombie");
+            ZOMBIE_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier against undead").
+                    defineInRange("multiplier", 0.2f, 0, 5);
+            ZOMBIE_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier when hit by Lhama").
+                    defineInRange("multiplier_neg", 4f, 0, 5);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("wither_skeleton");
+            WITHER_SKELETON_CHANCE = SERVER_BUILDER.comment("chance to Apply wither when attack").
+                    defineInRange("chance", 1, 0, 100);;
+            WITHER_SKELETON_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier against wither effected enemies").
+                    defineInRange("multiplier", 0.5, 0, 5);;
+            WITHER_SKELETON_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier apply to explosion type damage to the player").
+                    defineInRange("multiplier_neg", 0.3, 0, 5);;
+            WITHER_SKELETON_TIME = SERVER_BUILDER.comment("how much time wither is apply in ticks").
+                    defineInRange("time", 80, 0, 2000);
+            SERVER_BUILDER.pop();
+
+
+            SERVER_BUILDER.push("blaze");
+            BLAZE_CHANCE1 = SERVER_BUILDER.comment("chance to set enemy on hit when attack").
+                    defineInRange("chance1", 1, 0, 100);;
+            BLAZE_CHANCE2 = SERVER_BUILDER.comment("chance to extend fire on enemy when attack").
+                    defineInRange("chance2", 30, 0, 100);;
+            BLAZE_TIME1 = SERVER_BUILDER.comment("time of fire when activate effect1").
+                    defineInRange("time1", 100, 0, 2000);;
+            BLAZE_TIME2 = SERVER_BUILDER.comment("time of fire when activate effect2").
+                    defineInRange("time2", 100, 0, 2000);
+            BLAZE_KNOCKBACK_NEG = SERVER_BUILDER.comment("percent of knockback add when player hit under water").
+                    defineInRange("knockback_neg", 0.3f, 0, 5);
             SERVER_BUILDER.pop();
 
             //getting drop rates

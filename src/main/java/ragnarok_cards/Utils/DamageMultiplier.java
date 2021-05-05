@@ -36,7 +36,7 @@ public class DamageMultiplier {
         }
 
         if(cards.containsKey("sheep") && target instanceof AnimalEntity) {
-            multiplier *= 1 + 0.25 * cards.get("sheep");
+            multiplier *= 1 + cards.get("sheep") * SHEEP_MULTIPLIER.get();
         }
 
         if(cards.containsKey("spider") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
@@ -57,8 +57,8 @@ public class DamageMultiplier {
             multiplier *= 1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
         }
 
-        if(source.isProjectile() && cards.containsKey("witch")) {
-            double witch_multiplier = 1 + 0.2 * cards.get("witch");
+        if(source.isProjectile() == false && cards.containsKey("witch")) {
+            double witch_multiplier = 1 + cards.get("witch") * WITCH_MULTIPLIER.get();
             multiplier *= Math.pow(witch_multiplier, target.getActivePotionEffects().size());
         }
 

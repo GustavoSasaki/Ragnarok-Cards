@@ -89,9 +89,6 @@ public class VerificateCards {
         return passCheck(quantity,cardNameToChance.get(cardName) * multiplier);
     }
 
-    static public boolean SingleCardActivate (PlayerEntity player, String cardName) {
-        return SingleCardActivate (player, cardName, 1);
-    }
 
 
     static public float ApplyAttackCards(float damage, DamageSource source, LivingEntity target){

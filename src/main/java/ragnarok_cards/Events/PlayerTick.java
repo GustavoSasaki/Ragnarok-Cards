@@ -25,13 +25,14 @@ public class PlayerTick {
         CompoundNBT nbt_persistant = getNbtSafe(event.player.getPersistentData(),event.player.PERSISTED_NBT_TAG);
         CompoundNBT nbt = getNbtSafe(nbt_persistant,MOD_ID);
 
-        if(nbt.contains("creeperCardPlayerExplode") && nbt.getBoolean("creeperCardPlayerExplode")) {
+        if(nbt.contains("creeperShouldExplode") && nbt.getBoolean("creeperShouldExplode")) {
             Long currentTime = event.player.world.getGameTime();
-            if(10 < currentTime - nbt.getLong("creeperCardActivate")){
+            if(10 < currentTime - nbt.getLong("creeperLastActivate")){
                 double posX = event.player.getPosX();
                 double posY = event.player.getPosY();
                 double posZ = event.player.getPosZ();
-
+                nbt.putBoolean("creeperShouldExplode",false);
+                nbt.putBoolean("creeperSelfExplosion",true);
                 event.player.world.createExplosion((LivingEntity)null, posX, posY + 1, posZ, 5f, Explosion.Mode.DESTROY);
 
             }

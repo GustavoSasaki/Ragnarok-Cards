@@ -67,16 +67,12 @@ public class Config {
         public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_POWER_NEG;
         public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> SHEEP_EFFECT_NEG;
 
-        class configPotion{
-            public int time;
-            public int power;
-            public String name;
-            configPotion(int time, int power, String name){
-                this.time = time;
-                this.power = power;
-                this.name = name;
-            }
-        }
+        public static ForgeConfigSpec.DoubleValue WITCH_MULTIPLIER;
+        public static ForgeConfigSpec.IntValue WITCH_CHANCE_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> WITCH_EFFECT_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> WITCH_TIME_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> WITCH_POWER_NEG;
+
         public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER;
         public static ForgeConfigSpec.DoubleValue PIG_MULTIPLIER_NEG;
 
@@ -88,6 +84,13 @@ public class Config {
         public static ForgeConfigSpec.DoubleValue SPIDER_DAMAGE;
         public static ForgeConfigSpec.IntValue SPIDER_TIME;
         public static ForgeConfigSpec.IntValue SPIDER_POWER;
+
+        public static ForgeConfigSpec.IntValue CREEPER_CHANCE;
+        public static ForgeConfigSpec.BooleanValue CREEPER_EXTRA_EXPLOSION;
+        public static ForgeConfigSpec.IntValue CREEPER_CHANCE_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> CREEPER_EFFECT_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> CREEPER_EFFECT_TIME_NEG;
+        public static ForgeConfigSpec.ConfigValue<List<? extends Integer>> CREEPER_EFFECT_POWER_NEG;
 
         public static ForgeConfigSpec.DoubleValue PHANTOM_MULTIPLIER;
         public static ForgeConfigSpec.DoubleValue PHANTOM_MULTIPLIER_NEG;
@@ -196,9 +199,7 @@ public class Config {
 
             SERVER_BUILDER.comment("apply one of this effects when eating meat and dont pass the negative check");
             SHEEP_EFFECT = SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
-                    defineList("effect",
-                            Arrays.asList(1, 5, 10, 11, 12, 3, 13, 16, 26),
-                            x -> true);
+                    defineList("effect", Arrays.asList(1, 5, 10, 11, 12, 3, 13, 16, 26), x -> true);
             SHEEP_EFFECT_POWER= SERVER_BUILDER.defineList("effect_power", Arrays.asList(2,2,2,2,2,2,2,2,2),
                     x -> ((Integer)x).intValue() > 0);
             SHEEP_EFFECT_TIME = SERVER_BUILDER.defineList("effect_time", Arrays.asList(200,200,200,200,200,200,200,600,600),
@@ -209,8 +210,19 @@ public class Config {
                     x -> true);
             SHEEP_EFFECT_POWER_NEG = SERVER_BUILDER.defineList("power_neg", Arrays.asList(1,1,1,1),x -> ((Integer)x).intValue() > 0);
             SHEEP_EFFECT_TIME_NEG = SERVER_BUILDER.defineList("effect_time_neg", Arrays.asList(100,1000,1000,200),x -> ((Integer)x).intValue() > 0);
+            SERVER_BUILDER.pop();
 
-
+            SERVER_BUILDER.push("witch");
+            WITCH_MULTIPLIER = SERVER_BUILDER.comment("apply this damage multiplier for every effect in the enemy").
+                    defineInRange("multiplier", 0.2f, 0, 5);
+            WITCH_CHANCE_NEG= SERVER_BUILDER.comment("apply a random effect in the player and the enemy").
+                    defineInRange("chance_neg", 3, 0, 100);
+            WITCH_EFFECT_NEG = SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
+                    defineList("effect_neg", Arrays.asList(1,2,5,10,11,12,13,14,19,20,21,22,24,25,28), x -> true);
+            WITCH_TIME_NEG = SERVER_BUILDER.defineList("time_neg",
+                    Arrays.asList(200,200,200,200,200,200,200,100,100,100,200,200,100,100,200), x -> true);
+            WITCH_POWER_NEG  = SERVER_BUILDER.defineList("power_neg",
+                    Arrays.asList(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), x -> true);
 
             SERVER_BUILDER.pop();
 
@@ -239,6 +251,21 @@ public class Config {
                     defineInRange("time", 100, 0, 20000);
             SPIDER_POWER = SERVER_BUILDER.comment("how powerfull is the slow").
                     defineInRange("power", 4, 1, 10);
+            SERVER_BUILDER.pop();
+
+            SERVER_BUILDER.push("creeper");
+            CREEPER_CHANCE = SERVER_BUILDER.comment("chance to nullify explosion").
+                    defineInRange("chance", 20, 0, 100);
+            CREEPER_EXTRA_EXPLOSION = SERVER_BUILDER.comment("when explosion nullify, explode back?").
+                    define("extra_explosion", true);
+            CREEPER_CHANCE_NEG  = SERVER_BUILDER.comment("chance to apply all the negative effects when hit by arrow").
+                    defineInRange("chance_neg", 3, 0, 100);
+            CREEPER_EFFECT_NEG = SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
+                    defineList("effect_neg", Arrays.asList(2,15,18), x -> true);
+            CREEPER_EFFECT_TIME_NEG = SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
+                    defineList("effect_time_neg", Arrays.asList(100,30,30), x -> true);
+            CREEPER_EFFECT_POWER_NEG= SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
+                    defineList("effect_power_neg", Arrays.asList(1,2,1), x -> true);
             SERVER_BUILDER.pop();
 
             SERVER_BUILDER.push("phantom");

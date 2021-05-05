@@ -35,15 +35,18 @@ public class DefenseMultiplier {
                 CompoundNBT nbt = getNbtSafe(nbt_persistant,MOD_ID);
                 Long currentTime = player.world.getGameTime();
 
-                if(nbt.contains("creeperCardPlayerExplode") && nbt.getBoolean("creeperCardPlayerExplode")){
-                    nbt.putBoolean("creeperCardPlayerExplode",false);
+                if(nbt.contains("creeperSelfExplosion") && nbt.getBoolean("creeperSelfExplosion")){
+                    nbt.putBoolean("creeperSelfExplosion",false);
                     reduceToMin = true;
                 }
-                else if (passCheck("creeper", cards)) {
-                    if(!(nbt.contains("creeperCardActivate")) || 1000 < currentTime- nbt.getLong("creeperCardActivate")){
+                else if (passCheck(cards.get("creeper") ,CREEPER_CHANCE.get() )) {
+                    if(!(nbt.contains("creeperLastActivate")) || 100 < currentTime- nbt.getLong("creeperLastActivate")){
                         reduceToMin = true;
-                        nbt.putLong("creeperCardActivate",currentTime);
-                        nbt.putBoolean("creeperCardPlayerExplode",true);
+                        nbt.putLong("creeperLastActivate",currentTime);
+
+                        if(CREEPER_EXTRA_EXPLOSION.get()) {
+                            nbt.putBoolean("creeperShouldExplode", true);
+                        }
                         attacker.world.playSound((PlayerEntity)null, posX, posY, posZ , SoundEvents.ENTITY_CREEPER_HURT, player.getSoundCategory(), 1.0F, 3.0F);
 
                     }
@@ -77,7 +80,7 @@ public class DefenseMultiplier {
             }
         }
         if(cards.containsKey("phantom") && isEnderThing(attacker)){
-            multiplier *= 1 + PHANTOM_MULTIPLIER_NEG.get() * cards.get("phantom");
+            multiplier *= 1 + PHANTOM_MULTIPLIER_NEG.get() * cards.get("phantomF");
         }
 
         if(cards.containsKey("ocelot") && player.isInWater()) {
@@ -93,10 +96,10 @@ public class DefenseMultiplier {
         }
 
         if(cards.containsKey("whiter_skeleton") && source.isExplosion()) {
-            multiplier *= (1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get());
+            multiplier *= 1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get();
         }
         if(cards.containsKey("wolf")) {
-            multiplier *= (1 + cards.get("wolf") * WOLF_MULTIPLIER_NEG.get() );
+            multiplier *= 1 + cards.get("wolf") * WOLF_MULTIPLIER_NEG.get() ;
         }
 
         if(reduceToMin){

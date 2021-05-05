@@ -8,7 +8,7 @@ updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards/raw/master/update
 
 [[mods]]
 modId="ragnarok_cards"
-version="1.16.4-0.0.3"
+version="1.16.4-0.0.8"
 displayName="Ragnarok Cards"
 
 updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
@@ -16,8 +16,8 @@ displayURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="logo.png" #optional
 
-credits='''Programmer:Gustavo Sasaki (TheAgent00g)
-Artist: trillium109
+credits='''Programmer:Gustavo Sasaki (TheAgente00g)
+Artist: trillium109, Pepson
 '''
 #authors="Gustavo Sasaki (TheAgent00g)" #optional
 description='''

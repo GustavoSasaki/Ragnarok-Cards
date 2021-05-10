@@ -1,18 +1,89 @@
 {
 	"item.ragnarok_cards.blaze_card": "Blaze Card",
-	"item.ragnarok_cards.pig_card": "Pig Card",
-	"item.ragnarok_cards.zombie_card": "Zombie Card",
-	"item.ragnarok_cards.creeper_card": "Creeper Card",
-	"item.ragnarok_cards.spider_card": "Spider Card",
-	"item.ragnarok_cards.skeleton_card": "Skeleton Card",
-	"item.ragnarok_cards.snow_golem_card": "Snow Golem Card",
-	"item.ragnarok_cards.sheep_card": "Sheep Card",
-	"item.ragnarok_cards.phantom_card": "Phantom Card",
-	"item.ragnarok_cards.witch_card": "Witch Card",
-	"item.ragnarok_cards.piglin_card": "Piglin Card",
+	"item.ragnarok_cards.blaze.buff0": "Attacks have 1% chance to set enemy on fire",
+	"item.ragnarok_cards.blaze.buff1": "Attacks have 30% to extend fire",
+	"item.ragnarok_cards.blaze.debuff0": "Extra 30% knockback under water",
+
 	"item.ragnarok_cards.cave_spider_card": "Cave Spider Card",
-	"item.ragnarok_cards.wolf_card": "Wolf Card",
+	"item.ragnarok_cards.cave_spider.buff0":"4% chance to add poison with close range weapons",
+	"item.ragnarok_cards.cave_spider.debuff0": "Bane against arthropods",
+
+	"item.ragnarok_cards.creeper_card": "Creeper Card",
+	"item.ragnarok_cards.creeper.buff0":"20% chance to nullify explosion damage",
+	"item.ragnarok_cards.creeper.debuff0": "4% chance to took an arrow in the knee",
+
 	"item.ragnarok_cards.ocelot_card": "Ocelot Card",
+	"item.ragnarok_cards.ocelot.buff0":"30% chance to negate fall damage",
+	"item.ragnarok_cards.ocelot.debuff0":"Receive 20% more damage in water",
+
+	"item.ragnarok_cards.phantom_card": "Phantom Card",
+	"item.ragnarok_cards.phantom.buff0": "25% damage increase against flying enemies",
+	"item.ragnarok_cards.phantom.debuff0":"15% more damage from The End mobs",
+
+	"item.ragnarok_cards.pig_card": "Pig Card",
+	"item.ragnarok_cards.pig.buff0":"25% damage increase against Pig type enemies",
+	"item.ragnarok_cards.pig.debuff0":"15% more fall damage",
+
+	"item.ragnarok_cards.piglin_card": "Piglin Card",
+	"item.ragnarok_cards.piglin.buff0":"+1.5 damage with bad material weapons and tools",
+	"item.ragnarok_cards.piglin.debuff0":"Attacks from undead are 20% stronger and causes hunger",
+
+	"item.ragnarok_cards.sheep_card": "Sheep Card",
+	"item.ragnarok_cards.sheep.buff0":"25% damage increase against animals",
+	"item.ragnarok_cards.sheep.debuff0":"Extra effects when eating meat",
+
+	"item.ragnarok_cards.skeleton_card": "Skeleton Card",
+	"item.ragnarok_cards.skeleton.buff0":"Attacks against same type enemies gets 2% consecutively stronger",
+	"item.ragnarok_cards.skeleton.buff1":"Bonus reset if hit other type of enemy",
+	"item.ragnarok_cards.skeleton.debuff0":"fire damage deal 20% more",
+
+	"item.ragnarok_cards.snow_golem_card": "Snow Golem Card",
+	"item.ragnarok_cards.snow_golem.buff0": "Snowballs have 5% to add 3s slowness",
+
+	"item.ragnarok_cards.spider_card": "Spider Card",
+	"item.ragnarok_cards.spider.buff0":"Bane of arthropods",
+	"item.ragnarok_cards.spider.debuff0":"Bane of arthropods",
+
 	"item.ragnarok_cards.whiter_skeleton_card": "Whiter Skeleton Card",
-	"item.ragnarok_cards.zombie_piglin_card": "Zombie Piglin Card"
+	"item.ragnarok_cards.whiter_skeleton.buff0": "2% to apply whiter with close range weapons",
+	"item.ragnarok_cards.whiter_skeleton.buff1": "50% increase damage against enemies with wither",
+	"item.ragnarok_cards.whiter_skeleton.debuff0": "explosions deal 30% more damage",
+
+	"item.ragnarok_cards.witch_card": "Witch Card",
+	"item.ragnarok_cards.witch.buff0": "Multiplies damage by 1.2 for each effect in the enemy with close range weapons",
+	"item.ragnarok_cards.witch.debuff0": "3% chance to apply random effect in the user and the enemy  with close range weapons",
+
+	"item.ragnarok_cards.wolf_card": "Wolf Card",
+	"item.ragnarok_cards.wolf.buff0": "Pets deal +1 damage",
+	"item.ragnarok_cards.wolf.buff1": "Pets have 20% chance to receive reduce damage",
+	"item.ragnarok_cards.wolf.debuff0": "Receive 10% more damage from anything",
+
+	"item.ragnarok_cards.zombie_card": "Zombie Card",
+	"item.ragnarok_cards.zombie.buff0": "20% increase damage against undead",
+	"item.ragnarok_cards.zombie.debuff0": "Llamas deals 4x damage, be careful",
+
+	"item.ragnarok_cards.zombie_piglin_card": "Zombie Piglin Card",
+	"item.ragnarok_cards.zombie_piglin.buff0": "4% chance to deal 3x damage",
+	"item.ragnarok_cards.zombie_piglin.debuff0": "2% chance to receive 3x damage",
+
+
+
+
+
+	"item.ragnarok_cards.loot_box": "Definitely not a Loot Box",
+	"item.ragnarok_cards.loot_box.description": "Create a random already seen Ragnarok Card",
+
+	"tooltip.ragnarok_cards.shift": "\"\\u00A77Hold \\u00A7eShift \\u00A77for More Information",
+
+	"advancement.ragnarok_cards.first_advancement.title":"IT'S TIME TO D UDUUDUDUDUDUEL",
+	"advancement.ragnarok_cards.first_advancement.description":"Get you first Ragnarok Card",
+	"advancement.ragnarok_cards.all_cards.title":"King of Games",
+	"advancement.ragnarok_cards.all_cards.description":"Get every Ragnarok Card",
+	"advancement.ragnarok_cards.nether_cards.title": "Hellish Cards",
+	"advancement.ragnarok_cards.nether_cards.description": "Get every Ragnarok Card from The Nether",
+	"advancement.ragnarok_cards.animal_cards.title": ":<",
+	"advancement.ragnarok_cards.animal_cards.description": "Get every Ragnarok Card from passive mobs",
+	"advancement.ragnarok_cards.monster_cards.title": "For the good of humanity",
+	"advancement.ragnarok_cards.monster_cards.description": "Get every Ragnarok Card from overworld monsters"
+
 }

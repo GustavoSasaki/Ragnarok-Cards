@@ -11,11 +11,13 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Map;
 
+import static ragnarok_cards.Config.WOLF_CHANCE;
+import static ragnarok_cards.Config.WOLF_DAMAGE;
 import static ragnarok_cards.Utils.DamageMultiplier.ApplyDamageMultiplier;
 import static ragnarok_cards.Utils.DefenseMultiplier.ApplyDefenseMultiplier;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class GenericDamageEvents {
 
     @SubscribeEvent
@@ -35,7 +37,7 @@ public class GenericDamageEvents {
             LivingEntity tamer = ((TameableEntity)attacker).getOwner();
 
             if(tamer instanceof PlayerEntity){
-                event.setAmount( event.getAmount() + 2* HowManyCards((PlayerEntity) tamer,"wolf"));
+                event.setAmount((float) (event.getAmount() + WOLF_DAMAGE.get()* HowManyCards((PlayerEntity) tamer,"wolf")));
             }
         }
 
@@ -48,7 +50,7 @@ public class GenericDamageEvents {
             LivingEntity tamer = ((TameableEntity)target).getOwner();
 
             if(tamer instanceof PlayerEntity){
-                if(SingleCardActivate((PlayerEntity) tamer, "wolf")) {
+                if(SingleCardActivate((PlayerEntity) tamer, "wolf",WOLF_CHANCE.get())) {
                     event.setAmount(1);
                 }
             }

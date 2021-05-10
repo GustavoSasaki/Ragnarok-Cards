@@ -18,9 +18,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Map;
 
+import static ragnarok_cards.Config.*;
+import static ragnarok_cards.Utils.IDtoEffect.toEffect;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@Mod.EventBusSubscriber()
 public class ShootingEvents {
 
 
@@ -48,16 +50,17 @@ public class ShootingEvents {
             return;
         }
 
-        if(SingleCardActivate(shooter, "snowman")) {
+        if(SingleCardActivate(shooter, "snowman",SNOW_GOLEM_CHANCE.get())) {
 
-            int curSlowTime = 0;
-            if( ((LivingEntity) target).isPotionActive(Effects.SLOWNESS)){
-                curSlowTime = ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
+            int curSlowTime = SNOW_GOLEM_TIME.get();
+            boolean slowed = ((LivingEntity) target).isPotionActive(Effects.SLOWNESS);
+            if(slowed){
+                curSlowTime += ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
             }
 
-            System.out.println(curSlowTime);
-            //3seconds of slow
-            ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, 500 + curSlowTime));
+            if(!(SNOW_GOLEM_STACK.get() && slowed)) {
+                ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, curSlowTime,SNOW_GOLEM_POWER.get()));
+            }
         }
 
     }
@@ -76,10 +79,13 @@ public class ShootingEvents {
 
         PlayerEntity player = (PlayerEntity) target;
 
-        if(SingleCardActivate(player, "creeper", 1/5)) {
-            player.addPotionEffect(new EffectInstance(Effects.BLINDNESS, 30));
-            player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 300,3));
-            player.addPotionEffect(new EffectInstance(Effects.WEAKNESS, 300,2));
+        if(SingleCardActivate(player, "creeper", CREEPER_CHANCE_NEG.get())) {
+            for(int i =0;i<CREEPER_EFFECT_NEG.get().size();i++) {
+                int power = CREEPER_EFFECT_POWER_NEG.get().get(i);
+                int time = CREEPER_EFFECT_TIME_NEG.get().get(i);
+                int id = CREEPER_EFFECT_NEG.get().get(i);
+                player.addPotionEffect(toEffect.get(id).apply(time,power));
+            }
         }
     }
 

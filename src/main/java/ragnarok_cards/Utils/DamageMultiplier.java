@@ -18,6 +18,9 @@ import net.minecraft.util.SoundEvents;
 
 import java.util.Map;
 
+import static ragnarok_cards.Config.*;
+import static ragnarok_cards.RagnarokCards.MOD_ID;
+import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 public class DamageMultiplier {
@@ -29,40 +32,39 @@ public class DamageMultiplier {
         float flatDamageBuff = 0;
 
         if(cards.containsKey("zombie") && target.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            multiplier *= 1 + 0.2 * cards.get("zombie");
+            multiplier *= 1 + cards.get("zombie") * ZOMBIE_MULTIPLIER.get();
         }
 
         if(cards.containsKey("sheep") && target instanceof AnimalEntity) {
-            multiplier *= 1 + 0.25 * cards.get("sheep");
+            multiplier *= 1 + cards.get("sheep") * SHEEP_MULTIPLIER.get();
         }
 
         if(cards.containsKey("spider") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
-            multiplier *= 1 + 0.25 * cards.get("spider");
+            multiplier *= 1 + cards.get("spider") * SPIDER_DAMAGE.get();
 
-            //add slow for 1.5s
-            target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 250,4));
+            target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, SPIDER_TIME.get(),SPIDER_POWER.get()));
         }
 
         if(cards.containsKey("phantom") && isFlyingThing(target)) {
-            multiplier *= 1 + 0.25 * cards.get("phantom");
+            multiplier *= 1 +  cards.get("phantom") * PHANTOM_MULTIPLIER.get();
         }
 
         if(cards.containsKey("pig") && ( target instanceof PigEntity || target instanceof AbstractPiglinEntity )) {
-            multiplier *= 1 + 0.25 * cards.get("pig");
+            multiplier *= 1 + cards.get("pig") * PIG_MULTIPLIER_NEG.get();
         }
 
         if(cards.containsKey("whiter_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {
-            multiplier *= 1 + 0.5 * cards.get("whiter_skeleton");
+            multiplier *= 1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
         }
 
-        if(source.isProjectile() && cards.containsKey("witch")) {
-            double witch_multiplier = 1 + 0.2 * cards.get("witch");
+        if(source.isProjectile() == false && cards.containsKey("witch")) {
+            double witch_multiplier = 1 + cards.get("witch") * WITCH_MULTIPLIER.get();
             multiplier *= Math.pow(witch_multiplier, target.getActivePotionEffects().size());
         }
 
         if(cards.containsKey("zombie_piglin")) {
-            if (passCheck(cards.get("zombie_piglin").intValue(), cardNameToChance.get("zombie_piglin") )) {
-                multiplier *= 3;
+            if (passCheck(cards.get("zombie_piglin").intValue(), ZOMBIE_PIGLIN_CHANCE.get() )) {
+                multiplier *= ZOMBIE_PIGLIN_MULTIPLIER.get();
                 player.onCriticalHit(target);
                 player.onCriticalHit(target);
                 player.onCriticalHit(target);
@@ -74,8 +76,8 @@ public class DamageMultiplier {
         if(cards.containsKey("piglin")) {
             Item currItem = player.inventory.getCurrentItem().getItem();
 
-            if(currItem instanceof TieredItem && ((TieredItem)currItem).getTier().getAttackDamage() < 2){
-                flatDamageBuff += (int) (1.5 * cards.get("piglin"));
+            if(currItem instanceof TieredItem && ((TieredItem)currItem).getTier().getAttackDamage() < PIGLIN_MAX_TIER.get()){
+                flatDamageBuff += (int) (PIGLIN_DAMAGE.get() * cards.get("piglin"));
             }
         }
 
@@ -94,8 +96,9 @@ public class DamageMultiplier {
     // bonus attack when player consecutively hitting same type of enemy
     private static float ApplySkeletonCard(PlayerEntity player,LivingEntity target, float multiplier,Map<String, Integer> cards){
         if(cards.containsKey("skeleton")) {
-            System.out.println(multiplier);
-            CompoundNBT nbt = player.getPersistentData();
+
+            CompoundNBT persistant_nbt = getNbtSafe(player.getPersistentData(),player.PERSISTED_NBT_TAG);
+            CompoundNBT nbt = getNbtSafe(persistant_nbt,MOD_ID);
 
             if (!nbt.contains("lastTypeEnemyHitten")){
                 nbt.putString("lastTypeEnemyHitten","none");
@@ -109,14 +112,13 @@ public class DamageMultiplier {
                 consecutivelyHits = nbt.getInt("consecutivelyHits");
                 consecutivelyHits += cards.get("skeleton");
 
-                multiplier += 0.02 * consecutivelyHits;
+                multiplier += consecutivelyHits * SKELETON_MULTIPLIER.get();
             }else{
                 consecutivelyHits = 1;
                 nbt.putString( "lastTypeEnemyHitten", target.getType().toString() );
             }
 
             nbt.putInt( "consecutivelyHits", consecutivelyHits);
-            System.out.println(multiplier);
         }
 
         return multiplier;

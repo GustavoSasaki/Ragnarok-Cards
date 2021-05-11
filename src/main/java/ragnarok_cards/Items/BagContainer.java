@@ -12,13 +12,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class RagnarokBagContainer extends Container {
+public class BagContainer extends Container {
 
-        public RagnarokBagContainer(final int windowId, final PlayerInventory playerInventory) {
+        public BagContainer(final int windowId, final PlayerInventory playerInventory) {
             this(windowId, playerInventory.player.world, playerInventory.player.getPosition(), playerInventory, playerInventory.player);
         }
 
-        public RagnarokBagContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        public BagContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
             super(type, windowId);
 
             playerInv = playerInventory;
@@ -33,8 +33,8 @@ public class RagnarokBagContainer extends Container {
             IItemHandler tmp = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
             System.out.println(tmp);
 
-            if (tmp instanceof RagnarokBagItemHandler) {
-                handler = (RagnarokBagItemHandler)tmp;
+            if (tmp instanceof BagItemHandler) {
+                handler = (BagItemHandler)tmp;
                 handler.load();
                 slotcount = tmp.getSlots();
                 itemKey = stack.getTranslationKey();
@@ -46,7 +46,7 @@ public class RagnarokBagContainer extends Container {
                 playerEntity.closeScreen();
         }
 
-        public RagnarokBagContainer(int openType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        public BagContainer(int openType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
             this(windowId, world, pos, playerInventory, playerEntity);
         }
 
@@ -54,9 +54,9 @@ public class RagnarokBagContainer extends Container {
 
         private int slotID;
         public String itemKey = "";
-        public static final ContainerType type = new ContainerType<>(RagnarokBagContainer::new).setRegistryName("sb_container");
+        public static final ContainerType type = new ContainerType<>(BagContainer::new).setRegistryName("sb_container");
         private PlayerInventory playerInv;
-        public RagnarokBagItemHandler handler;
+        public BagItemHandler handler;
 
 
 
@@ -84,7 +84,7 @@ public class RagnarokBagContainer extends Container {
         private ItemStack findBackpack(PlayerEntity playerEntity) {
             PlayerInventory inv = playerEntity.inventory;
 
-            if (playerEntity.getHeldItemMainhand().getItem() instanceof RagnarokBag) {
+            if (playerEntity.getHeldItemMainhand().getItem() instanceof BagItem) {
                 for (int i = 0; i <= 35; i++) {
                     ItemStack stack = inv.getStackInSlot(i);
                     if (stack == playerEntity.getHeldItemMainhand()) {
@@ -92,14 +92,14 @@ public class RagnarokBagContainer extends Container {
                         return stack;
                     }
                 }
-            } else if (playerEntity.getHeldItemOffhand().getItem() instanceof RagnarokBag) {
+            } else if (playerEntity.getHeldItemOffhand().getItem() instanceof BagItem) {
                 slotID = -106;
                 return playerEntity.getHeldItemOffhand();
             }
             else {
                 for (int i = 0; i <= 35; i++) {
                     ItemStack stack = inv.getStackInSlot(i);
-                    if (stack.getItem() instanceof RagnarokBag) {
+                    if (stack.getItem() instanceof BagItem) {
                         slotID = i;
                         return stack;
                     }
@@ -111,14 +111,14 @@ public class RagnarokBagContainer extends Container {
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
         if (slotID == -106)
-            return playerIn.getHeldItemOffhand().getItem() instanceof RagnarokBag; //whoops guess you can...
-        return playerIn.inventory.getStackInSlot(slotID).getItem() instanceof RagnarokBag;
+            return playerIn.getHeldItemOffhand().getItem() instanceof BagItem; //whoops guess you can...
+        return playerIn.inventory.getStackInSlot(slotID).getItem() instanceof BagItem;
     }
 
     @Override
     public ItemStack slotClick(int slot, int dragType, ClickType clickTypeIn, PlayerEntity player) {
         if (slot >= 0) {
-            if (getSlot(slot).getStack().getItem() instanceof RagnarokBag)
+            if (getSlot(slot).getStack().getItem() instanceof BagItem)
                 return ItemStack.EMPTY;
         }
         if (clickTypeIn == ClickType.SWAP)
@@ -179,7 +179,7 @@ public class RagnarokBagContainer extends Container {
                 int x = 7 + col * 18;
                 int y = 17 + row * 18;
 
-                this.addSlot(new RagnarokBagSlot(handler, slotindex, x + 1, y + 1));
+                this.addSlot(new BagSlot(handler, slotindex, x + 1, y + 1));
                 slotindex++;
                 if (slotindex >= slotcount)
                     break;

@@ -18,7 +18,7 @@ import static ragnarok_cards.Utils.DefenseMultiplier.ApplyDefenseMultiplier;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 @Mod.EventBusSubscriber()
-public class GenericDamageEvents {
+public class GenericDamage {
 
     @SubscribeEvent
     public static void ModHurtEvent(LivingHurtEvent event) {

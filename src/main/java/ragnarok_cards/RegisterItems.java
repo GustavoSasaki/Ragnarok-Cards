@@ -1,17 +1,12 @@
 package ragnarok_cards;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import ragnarok_cards.Items.LootBox;
+import ragnarok_cards.Items.BagItem;
 import ragnarok_cards.Items.RagnarokCard;
-
-import java.util.Arrays;
 
 import static ragnarok_cards.RagnarokCards.MOD_ID;
 
@@ -45,6 +40,7 @@ public class RegisterItems {
     public static final RegistryObject<Item> ZOMBIE_PIGLIN_CARD = RegisterCard("zombie_piglin",1,1);
 
     public static final RegistryObject<Item> LOOT_BOX = ITEMS.register("loot_box", () -> new LootBox());
+    public static final RegistryObject<Item> BAG = ITEMS.register("bag", () -> new BagItem());
     //public static final Item VINDICATOR_CARD = new RagnarokCard("vindicator","Fully charge axe attack have 10% to remove one of enemy armor or weapon","Deal 30% less damage to arthropods");
     //public static final Item VILLAGER_CARD = new RagnarokCard("villager","Killing a enemy with a hoe has 3% to spawn a golem","");
 

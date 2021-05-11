@@ -23,7 +23,7 @@ import static ragnarok_cards.Utils.IDtoEffect.toEffect;
 import static ragnarok_cards.Utils.VerificateCards.*;
 
 @Mod.EventBusSubscriber()
-public class ShootingEvents {
+public class Shooting {
 
 
     @SubscribeEvent

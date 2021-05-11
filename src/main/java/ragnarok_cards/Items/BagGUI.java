@@ -1,4 +1,4 @@
-package ragnarok_cards.Utils;
+package ragnarok_cards.Items;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import ragnarok_cards.Items.RagnarokBagContainer;
-import ragnarok_cards.Items.RagnarokCard;
+import ragnarok_cards.Items.BagContainer;
 
-import static ragnarok_cards.RegisterEventsItems.MOD_ID;
+import static ragnarok_cards.RagnarokCards.MOD_ID;
 
-public class RagnarokBagGUI extends ContainerScreen<RagnarokBagContainer> {
 
-        public RagnarokBagGUI(RagnarokBagContainer container, PlayerInventory playerInventory, ITextComponent name) {
+public class BagGUI extends ContainerScreen<BagContainer> {
+
+        public BagGUI(BagContainer container, PlayerInventory playerInventory, ITextComponent name) {
             super(container, playerInventory, name);
 
 

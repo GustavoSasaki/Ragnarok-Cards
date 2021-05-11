@@ -8,10 +8,10 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class RagnarokBagItemHandler extends ItemStackHandler {
+public class BagItemHandler extends ItemStackHandler {
     private ItemStack itemStack;
 
-    public RagnarokBagItemHandler(ItemStack itemStack) {
+    public BagItemHandler(ItemStack itemStack) {
         super(18);
         this.itemStack = itemStack;
     }

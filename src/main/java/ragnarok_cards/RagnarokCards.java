@@ -67,22 +67,22 @@ public class RagnarokCards
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,Config.CLIENT_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER,Config.SERVER_CONFIG);
 
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientStuff);
 
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
+        //MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.addListener(this::onClientTick);
     }
 
 
     private void clientStuff(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(BagContainer.type, BagGUI::new);
 
-        keyBinds.add(0, new KeyBinding("key.simplybackpacks.backpackpickup.desc", -1, "key.simplybackpacks.category"));
-        ClientRegistry.registerKeyBinding(keyBinds.get(0));
+        //keyBinds.add(0, new KeyBinding("key.simplybackpacks.backpackpickup.desc", -1, "key.simplybackpacks.category"));
+        //ClientRegistry.registerKeyBinding(keyBinds.get(0));
 
-        keyBinds.add(1, new KeyBinding("key.simplybackpacks.backpackpickup.desc", -1, "key.simplybackpacks.category"));
-        ClientRegistry.registerKeyBinding(keyBinds.get(1));
+        //keyBinds.add(1, new KeyBinding("key.simplybackpacks.backpackpickup.desc", -1, "key.simplybackpacks.category"));
+        //ClientRegistry.registerKeyBinding(keyBinds.get(1));
     }
 
     //register recipes

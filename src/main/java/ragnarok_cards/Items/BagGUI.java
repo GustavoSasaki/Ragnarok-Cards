@@ -18,20 +18,9 @@ public class BagGUI extends ContainerScreen<BagContainer> {
 
         public BagGUI(BagContainer container, PlayerInventory playerInventory, ITextComponent name) {
             super(container, playerInventory, name);
-
-
-            switch(container.slotcount) {
-                case 66:
-                    GUI = new ResourceLocation(MOD_ID, "textures/gui/rare_gui.png");
-                    xSize = 212;
-                    ySize = 222;
-                    break;
-                default:
-                    GUI = new ResourceLocation(MOD_ID, "textures/gui/common_gui.png");
-                    xSize = 176;
-                    ySize = 150;
-                    break;
-            }
+            GUI = new ResourceLocation(MOD_ID, "textures/gui/common_gui.png");
+            xSize = 176;
+            ySize = 150;
         }
 
         private ResourceLocation GUI;
@@ -68,14 +57,9 @@ public class BagGUI extends ContainerScreen<BagContainer> {
         @Override
         public void render(MatrixStack matrixStack, int p_render_1_, int p_render_2_, float p_render_3_) {
             this.renderBackground(matrixStack);
-            super.render(matrixStack,p_render_1_, p_render_2_, p_render_3_);
             this.renderHoveredTooltip(matrixStack, p_render_1_, p_render_2_);
+            super.render(matrixStack,p_render_1_, p_render_2_, p_render_3_);
         }
 
-        @Override
-        public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
-
-            return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
-        }
 
 }

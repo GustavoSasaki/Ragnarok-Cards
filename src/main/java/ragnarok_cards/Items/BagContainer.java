@@ -13,51 +13,31 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class BagContainer extends Container {
+    public static final ContainerType type = new ContainerType<>(BagContainer::new).setRegistryName("ragnarok_bag_container");
+    private PlayerInventory playerInv;
+    public BagItemHandler handler;
+    public ItemStack stack;
 
-        public BagContainer(final int windowId, final PlayerInventory playerInventory) {
-            this(windowId, playerInventory.player.world, playerInventory.player.getPosition(), playerInventory, playerInventory.player);
-        }
 
-        public BagContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-            super(type, windowId);
+    public BagContainer(final int windowId, final PlayerInventory playerInventory) {
+        this(windowId, playerInventory, playerInventory.player);
+    }
 
-            playerInv = playerInventory;
-            ItemStack stack = findBackpack(playerEntity);
+    public BagContainer(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
+        super(type, windowId);
 
-            if (stack == null || stack.isEmpty()) {
-                playerEntity.closeScreen();
-                System.out.println("SEM BAGPACK");
-                return;
-            }
+        playerInv = playerInventory;
+        stack = player.getHeldItemMainhand().getItem() instanceof BagItem
+                ? player.getHeldItemMainhand()
+                : player.getHeldItemOffhand();
 
-            IItemHandler tmp = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
-            System.out.println(tmp);
+        handler = (BagItemHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
+        handler.load();
 
-            if (tmp instanceof BagItemHandler) {
-                handler = (BagItemHandler)tmp;
-                handler.load();
-                slotcount = tmp.getSlots();
-                itemKey = stack.getTranslationKey();
+        addBagInventory(stack);
+        addPlayerInventory(playerInv);
 
-                addMySlots(stack);
-                addPlayerSlots(playerInv);
-            }
-            else
-                playerEntity.closeScreen();
-        }
-
-        public BagContainer(int openType, int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-            this(windowId, world, pos, playerInventory, playerEntity);
-        }
-
-        public int slotcount = 18;
-
-        private int slotID;
-        public String itemKey = "";
-        public static final ContainerType type = new ContainerType<>(BagContainer::new).setRegistryName("sb_container");
-        private PlayerInventory playerInv;
-        public BagItemHandler handler;
-
+    }
 
 
 
@@ -81,73 +61,27 @@ public class BagContainer extends Container {
         return itemstack;
     }
 
-        private ItemStack findBackpack(PlayerEntity playerEntity) {
-            PlayerInventory inv = playerEntity.inventory;
-
-            if (playerEntity.getHeldItemMainhand().getItem() instanceof BagItem) {
-                for (int i = 0; i <= 35; i++) {
-                    ItemStack stack = inv.getStackInSlot(i);
-                    if (stack == playerEntity.getHeldItemMainhand()) {
-                        slotID = i;
-                        return stack;
-                    }
-                }
-            } else if (playerEntity.getHeldItemOffhand().getItem() instanceof BagItem) {
-                slotID = -106;
-                return playerEntity.getHeldItemOffhand();
-            }
-            else {
-                for (int i = 0; i <= 35; i++) {
-                    ItemStack stack = inv.getStackInSlot(i);
-                    if (stack.getItem() instanceof BagItem) {
-                        slotID = i;
-                        return stack;
-                    }
-                }
-            }
-            return ItemStack.EMPTY;
-        }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        if (slotID == -106)
-            return playerIn.getHeldItemOffhand().getItem() instanceof BagItem; //whoops guess you can...
-        return playerIn.inventory.getStackInSlot(slotID).getItem() instanceof BagItem;
+        return true;
     }
 
     @Override
     public ItemStack slotClick(int slot, int dragType, ClickType clickTypeIn, PlayerEntity player) {
-        if (slot >= 0) {
-            if (getSlot(slot).getStack().getItem() instanceof BagItem)
-                return ItemStack.EMPTY;
-        }
-        if (clickTypeIn == ClickType.SWAP)
+        if(slot <= 0 || stack == null || getSlot(slot).getStack() == stack){
             return ItemStack.EMPTY;
+        }
 
+        if (clickTypeIn == ClickType.SWAP) return ItemStack.EMPTY;
         if (slot >= 0) getSlot(slot).inventory.markDirty();
+
         return super.slotClick(slot, dragType, clickTypeIn, player);
     }
 
-    private void addPlayerSlots(PlayerInventory playerInventory) {
-        int originX = 0;
-        int originY = 0;
-        switch(slotcount) {
-            case 18:
-                originX = 7;
-                originY = 67;
-                break;
-            case 33:
-                originX = 25;
-                originY = 85;
-                break;
-            case 66:
-                originX = 25;
-                originY = 139;
-                break;
-            default:
-                originX = 25;
-                originY = 193;
-        }
+    private void addPlayerInventory(PlayerInventory playerInventory) {
+        int originX = 7;
+        int originY = 67;
 
         //Player Inventory
         for (int row = 0; row < 3; row++) {
@@ -167,21 +101,20 @@ public class BagContainer extends Container {
         }
     }
 
-    private void addMySlots(ItemStack stack) {
-        if (handler == null) return;
+    private void addBagInventory(ItemStack stack) {
+        if (handler == null) {
+            return;
+        }
 
-        int cols = slotcount == 18 ? 9 : 11;
-        int rows = slotcount / cols;
-        int slotindex = 0;
+        int maxY = BagItem.size / 9;
+        int curIndex = 0;
 
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                int x = 7 + col * 18;
-                int y = 17 + row * 18;
+        for (int y = 0; y < maxY; y++) {
+            for (int x = 0; x < 9; x++) {
+                this.addSlot(new BagSlot(handler, curIndex, 8 + x*18, (y+1)*18));
 
-                this.addSlot(new BagSlot(handler, slotindex, x + 1, y + 1));
-                slotindex++;
-                if (slotindex >= slotcount)
+                curIndex++;
+                if (curIndex >= BagItem.size)
                     break;
             }
         }

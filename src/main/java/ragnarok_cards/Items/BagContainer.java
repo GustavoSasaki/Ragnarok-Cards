@@ -2,6 +2,7 @@ package ragnarok_cards.Items;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -17,6 +18,7 @@ public class BagContainer extends Container {
     private PlayerInventory playerInv;
     public BagItemHandler handler;
     public ItemStack stack;
+    public int slotContainer = -2;
 
 
     public BagContainer(final int windowId, final PlayerInventory playerInventory) {
@@ -27,9 +29,20 @@ public class BagContainer extends Container {
         super(type, windowId);
 
         playerInv = playerInventory;
-        stack = player.getHeldItemMainhand().getItem() instanceof BagItem
-                ? player.getHeldItemMainhand()
-                : player.getHeldItemOffhand();
+
+        if(player.getHeldItemMainhand().getItem() instanceof BagItem){
+            stack = player.getHeldItemMainhand();
+            for(int i=0;i<9;i++){
+                if(playerInventory.mainInventory.get(i) == stack){
+                    slotContainer = i;
+                    break;
+                }
+            }
+
+        }else{
+            stack = player.getHeldItemOffhand();
+            slotContainer = -3;
+        }
 
         handler = (BagItemHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
         handler.load();
@@ -69,35 +82,37 @@ public class BagContainer extends Container {
 
     @Override
     public ItemStack slotClick(int slot, int dragType, ClickType clickTypeIn, PlayerEntity player) {
-        if(slot <= 0 || stack == null || getSlot(slot).getStack() == stack){
+        if(slot < 0 && clickTypeIn != ClickType.QUICK_CRAFT){
+            return ItemStack.EMPTY;
+        }
+        if(stack == null || slot == -2){
+            return ItemStack.EMPTY;
+        }
+        //the slot from this function and from player intentory hae different orders
+        if(slot - 45 == slotContainer ){
             return ItemStack.EMPTY;
         }
 
-        if (clickTypeIn == ClickType.SWAP) return ItemStack.EMPTY;
-        if (slot >= 0) getSlot(slot).inventory.markDirty();
+        if (clickTypeIn == ClickType.SWAP) {
+            return ItemStack.EMPTY;
+        }
 
+        if (slot >= 0) getSlot(slot).inventory.markDirty();
         return super.slotClick(slot, dragType, clickTypeIn, player);
     }
 
-    private void addPlayerInventory(PlayerInventory playerInventory) {
-        int originX = 7;
-        int originY = 67;
 
-        //Player Inventory
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 9; col++) {
-                int x = originX + col * 18;
-                int y = originY + row * 18;
-                int index = (col + row * 9) + 9;
-                this.addSlot(new Slot(playerInventory, index, x+1, y+1));
+    private void addPlayerInventory(PlayerInventory playerInventory) {
+
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 9; x++) {
+                int index = (x + (y+1) * 9);
+                this.addSlot(new Slot(playerInventory, index, 8 + x * 18, 68 + y * 18));
             }
         }
 
-        //Hotbar
-        for (int col = 0; col < 9; col++) {
-            int x = originX + col * 18;
-            int y = originY + 58;
-            this.addSlot(new Slot(playerInventory, col, x+1, y+1));
+        for (int x = 0; x < 9; x++) {
+            this.addSlot(new Slot(playerInventory, x, 8 + x * 18, 126));
         }
     }
 

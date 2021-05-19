@@ -2,30 +2,26 @@ package ragnarok_cards.Items;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
-public class BagContainer extends Container {
-    public static final ContainerType type = new ContainerType<>(BagContainer::new).setRegistryName("ragnarok_bag_container");
+public class BagContainerr extends Container {
+    public static final ContainerType type = new ContainerType<>(BagContainerr::new).setRegistryName("ragnarok_bag_container");
     private PlayerInventory playerInv;
     public BagItemHandler handler;
     public ItemStack stack;
     public int slotContainer = -2;
 
 
-    public BagContainer(final int windowId, final PlayerInventory playerInventory) {
+    public BagContainerr(final int windowId, final PlayerInventory playerInventory) {
         this(windowId, playerInventory, playerInventory.player);
     }
 
-    public BagContainer(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
+    public BagContainerr(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
         super(type, windowId);
 
         playerInv = playerInventory;

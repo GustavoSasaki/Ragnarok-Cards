@@ -1,36 +1,23 @@
 package ragnarok_cards.Events;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Food;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-import ragnarok_cards.Utils.IDtoEffect;
-import ragnarok_cards.Utils.SecundaryEffectsAttack;
-
-import java.util.ArrayList;
-import java.util.Random;
 
 import static ragnarok_cards.Config.*;
 import static ragnarok_cards.Utils.IDtoEffect.toEffect;
 import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
-import net.minecraft.util.registry.Registry;
 
 @Mod.EventBusSubscriber()
 public class EatFood {
 
     @SubscribeEvent
     public static void finishEat(LivingEntityUseItemEvent.Finish event) {
+
         if(event.getEntity().world.isRemote() || !(event.getEntity() instanceof PlayerEntity)){
             return;
         }

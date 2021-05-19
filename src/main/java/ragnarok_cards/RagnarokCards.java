@@ -8,22 +8,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import ragnarok_cards.Items.BagContainer;
-import ragnarok_cards.Items.BagGUI;
-import ragnarok_cards.Items.LootBoxRecipe;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import ragnarok_cards.Items.BagContainerr;
 import ragnarok_cards.Items.BagItem;
+import ragnarok_cards.Items.BagScreen;
+import ragnarok_cards.Items.LootBoxRecipe;
+import ragnarok_cards.Network.ModNetwork;
 
-import static ragnarok_cards.RegisterItems.*;
+import static ragnarok_cards.RegisterItems.ITEMS;
 
 
 @Mod(RagnarokCards.MOD_ID)
@@ -31,7 +33,6 @@ import static ragnarok_cards.RegisterItems.*;
 public class RagnarokCards
 {
     public static final String MOD_ID = "ragnarok_cards";
-    public static SimpleChannel network;
 
     //registering mob drops
     public static final DeferredRegister<GlobalLootModifierSerializer<?>> GLM = DeferredRegister.create(ForgeRegistries.LOOT_MODIFIER_SERIALIZERS, RagnarokCards.MOD_ID);
@@ -39,9 +40,11 @@ public class RagnarokCards
 
     public RagnarokCards() {
 
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        GLM.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ITEMS.register(bus);
+        GLM.register(bus);
+        bus.addListener(this::networkSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT,Config.CLIENT_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER,Config.SERVER_CONFIG);
@@ -61,7 +64,7 @@ public class RagnarokCards
 
 
     private void clientGUI(final FMLClientSetupEvent event) {
-        ScreenManager.registerFactory(BagContainer.type, BagGUI::new);
+        ScreenManager.registerFactory(BagContainerr.type, BagScreen::new);
     }
 
     public static ItemStack findBackpack(PlayerEntity player) {
@@ -84,8 +87,12 @@ public class RagnarokCards
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> containerRegistryEvent) {
-            containerRegistryEvent.getRegistry().register(BagContainer.type);
+            containerRegistryEvent.getRegistry().register(BagContainerr.type);
         }
+    }
+
+    public void networkSetup(final FMLCommonSetupEvent event) {
+        ModNetwork.init();
     }
 
 }

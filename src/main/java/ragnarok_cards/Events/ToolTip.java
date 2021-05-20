@@ -32,18 +32,14 @@ public class ToolTip {
 
         CompoundNBT bag_nbt = event.getItemStack().getOrCreateChildTag(MOD_ID);
 
-        event.getToolTip().add(new TranslationTextComponent(Boolean.toString(player_nbt.contains("bag_id"))).mergeStyle(TextFormatting.YELLOW));
-        event.getToolTip().add(new TranslationTextComponent(Boolean.toString(bag_nbt.contains("bag_id"))).mergeStyle(TextFormatting.YELLOW));
 
         if(!(player_nbt.contains("bag_id") && bag_nbt.contains("bag_id")) ){
             return;
         }
 
-        event.getToolTip().add(new TranslationTextComponent(Long.toString(player_nbt.getLong("bag_id"))).mergeStyle(TextFormatting.YELLOW));
-        event.getToolTip().add(new TranslationTextComponent(Long.toString(bag_nbt.getLong("bag_id"))).mergeStyle(TextFormatting.YELLOW));
         if(player_nbt.getLong("bag_id") == bag_nbt.getLong("bag_id")){
-            event.getToolTip().add(new TranslationTextComponent("Active").mergeStyle(TextFormatting.YELLOW));
-            event.getToolTip().add(new TranslationTextComponent("Put Ragnarok Cards inside in different slots to get the effects").mergeStyle(TextFormatting.GRAY));
+            event.getToolTip().add(new TranslationTextComponent("item.ragnarok_cards.bag.active").mergeStyle(TextFormatting.YELLOW));
+            event.getToolTip().add(new TranslationTextComponent("item.ragnarok_cards.bag.active.description").mergeStyle(TextFormatting.GRAY));
         }
 
     }

@@ -20,26 +20,20 @@ import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 @Mod.EventBusSubscriber()
 public class Clone {
     @SubscribeEvent
-    public static void ClonePersistentNbtClient(PlayerEvent.Clone event) {
-
-        CompoundNBT old_persistent_nbt = getNbtSafe(event.getOriginal().getPersistentData(), PlayerEntity.PERSISTED_NBT_TAG);
-        CompoundNBT old_nbt = getNbtSafe(old_persistent_nbt,MOD_ID);
+    public static void ClonePersistentNbtClient(PlayerEvent.PlayerRespawnEvent event) {
 
         System.out.println(event.getPlayer().world.isRemote);
-        System.out.println("clone");
+        System.out.println(event.getPlayer().world.isRemote);
+        System.out.println(event.getPlayer().world.isRemote);
+        //setting nbt in the servers
+        CompoundNBT persistent_nbt = getNbtSafe(event.getPlayer().getPersistentData(),PlayerEntity.PERSISTED_NBT_TAG);
+        CompoundNBT player_nbt = getNbtSafe(persistent_nbt,MOD_ID);
+        long bag_id = player_nbt.getLong("bag_id");
 
-        if(old_nbt.contains("bag_id")) {
-            System.out.println("tem bag id");
-            Long bag_id = old_nbt.getLong("bag_id");
 
-            //sending package from server to client
-            Supplier<ServerPlayerEntity> supplier = () -> (ServerPlayerEntity) event.getPlayer();
-            ModNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(supplier), new SyncBagId(bag_id));
+        //sending package from server to client
+        Supplier<ServerPlayerEntity> supplier = () -> (ServerPlayerEntity) event.getPlayer();
+        ModNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(supplier), new SyncBagId(bag_id));
 
-            Supplier<ServerPlayerEntity> supplier2 = () -> (ServerPlayerEntity) event.getOriginal();
-            ModNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(supplier2), new SyncBagId(bag_id));
-
-            System.out.println(bag_id);
-        }
     }
 }

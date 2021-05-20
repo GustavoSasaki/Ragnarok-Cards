@@ -73,6 +73,10 @@
 	"item.ragnarok_cards.loot_box": "Definitely not a Loot Box",
 	"item.ragnarok_cards.loot_box.description": "Create a random already seen Ragnarok Card",
 
+	"item.ragnarok_cards.bag": "Ragnarok Card Bag",
+	"item.ragnarok_cards.bag.active": "Active",
+	"item.ragnarok_cards.bag.active.description": "Put Ragnarok Cards inside in different slots to get their effects",
+
 	"tooltip.ragnarok_cards.shift": "\"\\u00A77Hold \\u00A7eShift \\u00A77for More Information",
 
 	"advancement.ragnarok_cards.first_advancement.title":"IT'S TIME TO D UDUUDUDUDUDUEL",

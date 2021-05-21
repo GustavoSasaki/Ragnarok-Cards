@@ -9,16 +9,15 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import ragnarok_cards.Items.BagContainerr;
 
 import static ragnarok_cards.RagnarokCards.MOD_ID;
 
 
-public class BagScreen extends ContainerScreen<BagContainerr> {
+public class BagScreen extends ContainerScreen<BagContainer> {
 
     private ResourceLocation GUI;
 
-    public BagScreen(BagContainerr container, PlayerInventory playerInventory, ITextComponent name) {
+    public BagScreen(BagContainer container, PlayerInventory playerInventory, ITextComponent name) {
         super(container, playerInventory, name);
         GUI = new ResourceLocation(MOD_ID, "textures/gui/bag_gui.png");
         xSize = 176;

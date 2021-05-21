@@ -18,7 +18,7 @@ import static ragnarok_cards.RagnarokCards.MOD_ID;
 import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 
 @Mod.EventBusSubscriber()
-public class Clone {
+public class Respawn {
     @SubscribeEvent
     public static void ClonePersistentNbtClient(PlayerEvent.PlayerRespawnEvent event) {
 

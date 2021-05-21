@@ -22,6 +22,7 @@ import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 import static ragnarok_cards.RagnarokCards.MOD_ID;
+import static ragnarok_cards.RegisterItems.cardNames;
 import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 
 public class BagItem extends Item {
@@ -73,12 +74,19 @@ public class BagItem extends Item {
             Supplier<ServerPlayerEntity> supplier = () -> (ServerPlayerEntity) playerIn;
             ModNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(supplier), new SyncBagId(bag_id));
 
+            System.out.println( "---------------------");
+            for( String name : cardNames){
+                if(bag_nbt.contains(name)){
+                    System.out.println( name + ": "+Integer.toString(bag_nbt.getInt(name)));
+                }
+            }
+            System.out.println( "---------------------");
 
             playerIn.openContainer(new INamedContainerProvider() {
                 @Nullable
                 @Override
                 public Container createMenu(int p_createMenu_1_, PlayerInventory p_createMenu_2_, PlayerEntity p_createMenu_3_) {
-                    return new BagContainerr(p_createMenu_1_, p_createMenu_2_, p_createMenu_3_);
+                    return new BagContainer(p_createMenu_1_, p_createMenu_2_, p_createMenu_3_);
                 }
 
                 @Override

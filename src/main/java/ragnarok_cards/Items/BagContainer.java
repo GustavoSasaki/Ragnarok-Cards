@@ -7,21 +7,24 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.items.CapabilityItemHandler;
 
-public class BagContainerr extends Container {
-    public static final ContainerType type = new ContainerType<>(BagContainerr::new).setRegistryName("ragnarok_bag_container");
+import static ragnarok_cards.RagnarokCards.MOD_ID;
+
+public class BagContainer extends Container {
+    public static final ContainerType type = new ContainerType<>(BagContainer::new).setRegistryName("ragnarok_bag_container");
     private PlayerInventory playerInv;
     public BagItemHandler handler;
     public ItemStack stack;
     public int slotContainer = -2;
 
 
-    public BagContainerr(final int windowId, final PlayerInventory playerInventory) {
+    public BagContainer(final int windowId, final PlayerInventory playerInventory) {
         this(windowId, playerInventory, playerInventory.player);
     }
 
-    public BagContainerr(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
+    public BagContainer(int windowId, PlayerInventory playerInventory, PlayerEntity player) {
         super(type, windowId);
 
         playerInv = playerInventory;
@@ -35,9 +38,6 @@ public class BagContainerr extends Container {
                 }
             }
 
-        }else{
-            stack = player.getHeldItemOffhand();
-            slotContainer = -3;
         }
 
         handler = (BagItemHandler) stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null);
@@ -130,5 +130,28 @@ public class BagContainerr extends Container {
             }
         }
     }
+
+    @Override
+    public void onContainerClosed(PlayerEntity playerIn) {
+        stack.removeChildTag(MOD_ID);
+        CompoundNBT nbt = stack.getOrCreateChildTag(MOD_ID);
+
+
+        for(int i=0;i<18;i++){
+            ItemStack card = this.inventorySlots.get(i).getStack();
+            if(!card.isEmpty()) {
+                String card_name = ((RagnarokCard) card.getItem()).cardName;
+
+                if(nbt.contains(card_name)){
+                    nbt.putInt(card_name, nbt.getInt(card_name) + 1);
+                }else{
+                    nbt.putInt(card_name, 1);
+                }
+            }
+        }
+
+        super.onContainerClosed(playerIn);
+    }
+
 }
 

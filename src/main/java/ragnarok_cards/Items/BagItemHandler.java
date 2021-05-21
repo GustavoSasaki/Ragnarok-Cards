@@ -4,9 +4,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+
+import static ragnarok_cards.RagnarokCards.MOD_ID;
 
 public class BagItemHandler extends ItemStackHandler {
     private ItemStack itemStack;
@@ -30,6 +33,9 @@ public class BagItemHandler extends ItemStackHandler {
     public void load() {
         load(itemStack.getOrCreateTag());
     }
+
+
+
 
 
     public void load(@Nonnull CompoundNBT nbt) {

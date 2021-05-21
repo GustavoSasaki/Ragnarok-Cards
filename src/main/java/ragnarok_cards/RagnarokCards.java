@@ -19,7 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import ragnarok_cards.Items.BagContainerr;
+import ragnarok_cards.Items.BagContainer;
 import ragnarok_cards.Items.BagItem;
 import ragnarok_cards.Items.BagScreen;
 import ragnarok_cards.Items.LootBoxRecipe;
@@ -64,7 +64,7 @@ public class RagnarokCards
 
 
     private void clientGUI(final FMLClientSetupEvent event) {
-        ScreenManager.registerFactory(BagContainerr.type, BagScreen::new);
+        ScreenManager.registerFactory(BagContainer.type, BagScreen::new);
     }
 
     public static ItemStack findBackpack(PlayerEntity player) {
@@ -87,7 +87,7 @@ public class RagnarokCards
     public static class RegistryEvents {
         @SubscribeEvent
         public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> containerRegistryEvent) {
-            containerRegistryEvent.getRegistry().register(BagContainerr.type);
+            containerRegistryEvent.getRegistry().register(BagContainer.type);
         }
     }
 

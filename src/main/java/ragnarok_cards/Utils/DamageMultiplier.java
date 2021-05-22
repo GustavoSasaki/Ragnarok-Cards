@@ -26,44 +26,44 @@ import static ragnarok_cards.Utils.VerificateCards.*;
 public class DamageMultiplier {
 
 
-    static public float ApplyDamageMultiplier (float damage, DamageSource source, LivingEntity target, Map<String, Integer> cards){
+    static public float ApplyDamageMultiplier (float damage, DamageSource source, LivingEntity target, CompoundNBT cards){
         PlayerEntity player = (PlayerEntity) source.getTrueSource();
         float multiplier = 1;
         float flatDamageBuff = 0;
 
-        if(cards.containsKey("zombie") && target.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            multiplier *= 1 + cards.get("zombie") * ZOMBIE_MULTIPLIER.get();
+        if(cards.contains("zombie") && target.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
+            multiplier *= 1 + cards.getInt("zombie") * ZOMBIE_MULTIPLIER.get();
         }
 
-        if(cards.containsKey("sheep") && target instanceof AnimalEntity) {
-            multiplier *= 1 + cards.get("sheep") * SHEEP_MULTIPLIER.get();
+        if(cards.contains("sheep") && target instanceof AnimalEntity) {
+            multiplier *= 1 + cards.getInt("sheep") * SHEEP_MULTIPLIER.get();
         }
 
-        if(cards.containsKey("spider") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
-            multiplier *= 1 + cards.get("spider") * SPIDER_DAMAGE.get();
+        if(cards.contains("spider") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
+            multiplier *= 1 + cards.getInt("spider") * SPIDER_DAMAGE.get();
 
             target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, SPIDER_TIME.get(),SPIDER_POWER.get()));
         }
 
-        if(cards.containsKey("phantom") && isFlyingThing(target)) {
-            multiplier *= 1 +  cards.get("phantom") * PHANTOM_MULTIPLIER.get();
+        if(cards.contains("phantom") && isFlyingThing(target)) {
+            multiplier *= 1 +  cards.getInt("phantom") * PHANTOM_MULTIPLIER.get();
         }
 
-        if(cards.containsKey("pig") && ( target instanceof PigEntity || target instanceof AbstractPiglinEntity )) {
-            multiplier *= 1 + cards.get("pig") * PIG_MULTIPLIER_NEG.get();
+        if(cards.contains("pig") && ( target instanceof PigEntity || target instanceof AbstractPiglinEntity )) {
+            multiplier *= 1 + cards.getInt("pig") * PIG_MULTIPLIER_NEG.get();
         }
 
-        if(cards.containsKey("whiter_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {
-            multiplier *= 1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
+        if(cards.contains("whiter_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {
+            multiplier *= 1 + cards.getInt("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
         }
 
-        if(source.isProjectile() == false && cards.containsKey("witch")) {
-            double witch_multiplier = 1 + cards.get("witch") * WITCH_MULTIPLIER.get();
+        if(source.isProjectile() == false && cards.contains("witch")) {
+            double witch_multiplier = 1 + cards.getInt("witch") * WITCH_MULTIPLIER.get();
             multiplier *= Math.pow(witch_multiplier, target.getActivePotionEffects().size());
         }
 
-        if(cards.containsKey("zombie_piglin")) {
-            if (passCheck(cards.get("zombie_piglin").intValue(), ZOMBIE_PIGLIN_CHANCE.get() )) {
+        if(cards.contains("zombie_piglin")) {
+            if (passCheck(cards.getInt("zombie_piglin"), ZOMBIE_PIGLIN_CHANCE.get() )) {
                 multiplier *= ZOMBIE_PIGLIN_MULTIPLIER.get();
                 player.onCriticalHit(target);
                 player.onCriticalHit(target);
@@ -73,17 +73,17 @@ public class DamageMultiplier {
             }
         }
 
-        if(cards.containsKey("piglin")) {
+        if(cards.contains("piglin")) {
             Item currItem = player.inventory.getCurrentItem().getItem();
 
             if(currItem instanceof TieredItem && ((TieredItem)currItem).getTier().getAttackDamage() < PIGLIN_MAX_TIER.get()){
-                flatDamageBuff += (int) (PIGLIN_DAMAGE.get() * cards.get("piglin"));
+                flatDamageBuff += (int) (PIGLIN_DAMAGE.get() * cards.getInt("piglin"));
             }
         }
 
 
-        if(cards.containsKey("vindicator") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
-            multiplier *= Math.min(0.1, 1 - 0.30 * cards.get("vindicator"));
+        if(cards.contains("vindicator") && target.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
+            multiplier *= Math.min(0.1, 1 - 0.30 * cards.getInt("vindicator"));
         }
 
 
@@ -94,8 +94,8 @@ public class DamageMultiplier {
 
 
     // bonus attack when player consecutively hitting same type of enemy
-    private static float ApplySkeletonCard(PlayerEntity player,LivingEntity target, float multiplier,Map<String, Integer> cards){
-        if(cards.containsKey("skeleton")) {
+    private static float ApplySkeletonCard(PlayerEntity player,LivingEntity target, float multiplier,CompoundNBT cards){
+        if(cards.contains("skeleton")) {
 
             CompoundNBT persistant_nbt = getNbtSafe(player.getPersistentData(),player.PERSISTED_NBT_TAG);
             CompoundNBT nbt = getNbtSafe(persistant_nbt,MOD_ID);
@@ -110,7 +110,7 @@ public class DamageMultiplier {
 
             if(lastTypeEnemyHitten.equals( target.getType().toString() ) ){
                 consecutivelyHits = nbt.getInt("consecutivelyHits");
-                consecutivelyHits += cards.get("skeleton");
+                consecutivelyHits += cards.getInt("skeleton");
 
                 multiplier += consecutivelyHits * SKELETON_MULTIPLIER.get();
             }else{

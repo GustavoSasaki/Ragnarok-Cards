@@ -64,11 +64,13 @@ public class BagItem extends Item {
 
         if (!worldIn.isRemote) {
 
+            getNbtSafe(playerIn.getPersistentData(),MOD_ID).putInt("bag_slot", bag_slot);
+
             //setting nbt in the servers
             CompoundNBT persistent_nbt = getNbtSafe(playerIn.getPersistentData(),PlayerEntity.PERSISTED_NBT_TAG);
+
             CompoundNBT player_nbt = getNbtSafe(persistent_nbt,MOD_ID);
             player_nbt.putLong("bag_id", bag_id);
-            player_nbt.putInt("bag_slot", bag_slot);
 
             //sending package from server to client
             Supplier<ServerPlayerEntity> supplier = () -> (ServerPlayerEntity) playerIn;

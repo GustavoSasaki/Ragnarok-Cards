@@ -56,8 +56,8 @@ public class PickUp {
             CompoundNBT bag_nbt = event.getPlayer().inventory.getStackInSlot(slot).getOrCreateChildTag(MOD_ID);
 
             if(bag_nbt.contains("bag_id") && bag_nbt.getLong("bag_id" ) == player_nbt.getLong("bag_id")){
-                System.out.println("RECUPEROU :)");
                 player_nbt.putInt("bag_slot",slot);
+                getNbtSafe(event.getPlayer().getPersistentData(),MOD_ID).putInt("bag_slot", slot);
             }
         }
 

@@ -21,7 +21,7 @@ import java.util.List;
 
 import static ragnarok_cards.Config.mapDropRate;
 
-public class LootModifiers {
+public class RagnarokCardLootModifiers {
 
     public static class AddMobDrop extends net.minecraftforge.common.loot.LootModifier {
         private final int chance;

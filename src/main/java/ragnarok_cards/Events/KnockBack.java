@@ -1,15 +1,12 @@
 package ragnarok_cards.Events;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static ragnarok_cards.Config.BLAZE_KNOCKBACK_NEG;
 import static ragnarok_cards.Utils.VerificateCards.HowManyCards;
-import static ragnarok_cards.Utils.VerificateCards.SingleCardActivate;
 
 @Mod.EventBusSubscriber()
 public class KnockBack {

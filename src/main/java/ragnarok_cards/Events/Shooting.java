@@ -50,18 +50,18 @@ public class Shooting {
             return;
         }
 
-        if(SingleCardActivate(shooter, "snowman",SNOW_GOLEM_CHANCE.get())) {
+        //if(SingleCardActivate(shooter, "snowman",SNOW_GOLEM_CHANCE.get())) {
 
-            int curSlowTime = SNOW_GOLEM_TIME.get();
-            boolean slowed = ((LivingEntity) target).isPotionActive(Effects.SLOWNESS);
-            if(slowed){
-                curSlowTime += ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
-            }
+        //    int curSlowTime = SNOW_GOLEM_TIME.get();
+        //    boolean slowed = ((LivingEntity) target).isPotionActive(Effects.SLOWNESS);
+        //    if(slowed){
+        //        curSlowTime += ((LivingEntity) target).getActivePotionEffect(Effects.SLOWNESS).getDuration();
+        //    }
 
-            if(!(SNOW_GOLEM_STACK.get() && slowed)) {
-                ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, curSlowTime,SNOW_GOLEM_POWER.get()));
-            }
-        }
+        //    if(!(SNOW_GOLEM_STACK.get() && slowed)) {
+        //        ((LivingEntity) target).addPotionEffect(new EffectInstance(Effects.SLOWNESS, curSlowTime,SNOW_GOLEM_POWER.get()));
+        //    }
+        //}
 
     }
 

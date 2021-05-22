@@ -19,7 +19,7 @@ import static ragnarok_cards.Utils.VerificateCards.*;
 
 public class DefenseMultiplier {
 
-    static public float ApplyDefenseMultiplier (float damage, PlayerEntity player, DamageSource source,Map<String, Integer> cards){
+    static public float ApplyDefenseMultiplier (float damage, PlayerEntity player, DamageSource source,CompoundNBT cards){
 
         LivingEntity attacker = (LivingEntity) source.getTrueSource();
         boolean reduceToMin = false;
@@ -30,7 +30,7 @@ public class DefenseMultiplier {
         double posZ = player.getPosZ();
 
         if(source.isExplosion()){
-            if(cards.containsKey("creeper")) {
+            if(cards.contains("creeper")) {
                 CompoundNBT nbt_persistant = getNbtSafe(player.getPersistentData(),player.PERSISTED_NBT_TAG);
                 CompoundNBT nbt = getNbtSafe(nbt_persistant,MOD_ID);
                 Long currentTime = player.world.getGameTime();
@@ -39,7 +39,7 @@ public class DefenseMultiplier {
                     nbt.putBoolean("creeperSelfExplosion",false);
                     reduceToMin = true;
                 }
-                else if (passCheck(cards.get("creeper") ,CREEPER_CHANCE.get() )) {
+                else if (passCheck(cards.getInt("creeper") ,CREEPER_CHANCE.get() )) {
                     if(!(nbt.contains("creeperLastActivate")) || 100 < currentTime- nbt.getLong("creeperLastActivate")){
                         reduceToMin = true;
                         nbt.putLong("creeperLastActivate",currentTime);
@@ -55,8 +55,8 @@ public class DefenseMultiplier {
             }
          }
 
-        if(cards.containsKey("zombie_piglin")) {
-            if (passCheck(cards.get("zombie_piglin"), ZOMBIE_PIGLIN_CHANCE_NEG.get())) {
+        if(cards.contains("zombie_piglin")) {
+            if (passCheck(cards.getInt("zombie_piglin"), ZOMBIE_PIGLIN_CHANCE_NEG.get())) {
 
                 multiplier *= ZOMBIE_PIGLIN_MULTIPLIER_NEG.get();
                 player.onCriticalHit(player);
@@ -67,39 +67,39 @@ public class DefenseMultiplier {
             }
         }
 
-        if(cards.containsKey("cave_spider") && attacker.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
-            flatDamageIncrease +=  cards.get("cave_spider") * CAVE_SPIDER_DAMAGE_NEG.get();
+        if(cards.contains("cave_spider") && attacker.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
+            flatDamageIncrease +=  cards.getInt("cave_spider") * CAVE_SPIDER_DAMAGE_NEG.get();
             player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, CAVE_SPIDER_SLOW_TIME_NEG.get(),4));
         }
 
-        if(cards.containsKey("piglin") && attacker.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-            multiplier *= (1 + PIGLIN_MULTIPLIER_NEG.get() * cards.get("piglin")  );
+        if(cards.contains("piglin") && attacker.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
+            multiplier *= (1 + PIGLIN_MULTIPLIER_NEG.get() * cards.getInt("piglin")  );
 
-            if (passCheck(cards.get("piglin"), PIGLIN_CHANCE_NEG.get())) {
+            if (passCheck(cards.getInt("piglin"), PIGLIN_CHANCE_NEG.get())) {
                 player.addPotionEffect(new EffectInstance(Effects.HUNGER, PIGLIN_TIME_NEG.get()));
             }
         }
-        if(cards.containsKey("phantom") && isEnderThing(attacker)){
-            multiplier *= 1 + PHANTOM_MULTIPLIER_NEG.get() * cards.get("phantomF");
+        if(cards.contains("phantom") && isEnderThing(attacker)){
+            multiplier *= 1 + PHANTOM_MULTIPLIER_NEG.get() * cards.getInt("phantom");
         }
 
-        if(cards.containsKey("ocelot") && player.isInWater()) {
-            multiplier *= (1 + OCELOT_MULTIPLIER_NEG.get() * cards.get("ocelot")  );
+        if(cards.contains("ocelot") && player.isInWater()) {
+            multiplier *= (1 + OCELOT_MULTIPLIER_NEG.get() * cards.getInt("ocelot")  );
         }
 
-        if(cards.containsKey("skeleton") && source.isFireDamage() ){
-            multiplier *= (1 + SKELETON_MULTIPLIER_NEG.get() * cards.get("skeleton") );
+        if(cards.contains("skeleton") && source.isFireDamage() ){
+            multiplier *= (1 + SKELETON_MULTIPLIER_NEG.get() * cards.getInt("skeleton") );
         }
 
-        if(cards.containsKey("zombie") && attacker instanceof LlamaEntity) {
-            multiplier *= ZOMBIE_MULTIPLIER_NEG.get() * cards.get("zombie");
+        if(cards.contains("zombie") && attacker instanceof LlamaEntity) {
+            multiplier *= ZOMBIE_MULTIPLIER_NEG.get() * cards.getInt("zombie");
         }
 
-        if(cards.containsKey("whiter_skeleton") && source.isExplosion()) {
-            multiplier *= 1 + cards.get("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get();
+        if(cards.contains("whiter_skeleton") && source.isExplosion()) {
+            multiplier *= 1 + cards.getInt("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get();
         }
-        if(cards.containsKey("wolf")) {
-            multiplier *= 1 + cards.get("wolf") * WOLF_MULTIPLIER_NEG.get() ;
+        if(cards.contains("wolf")) {
+            multiplier *= 1 + cards.getInt("wolf") * WOLF_MULTIPLIER_NEG.get() ;
         }
 
         if(reduceToMin){

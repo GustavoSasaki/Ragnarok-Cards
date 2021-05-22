@@ -55,7 +55,7 @@ public class Config {
         public static ForgeConfigSpec.DoubleValue SKELETON_MULTIPLIER_NEG;
 
         public static ForgeConfigSpec.DoubleValue WOLF_DAMAGE;
-        public static ForgeConfigSpec.DoubleValue WOLF_CHANCE;
+        public static ForgeConfigSpec.IntValue WOLF_CHANCE;
         public static ForgeConfigSpec.DoubleValue WOLF_MULTIPLIER_NEG;
 
         public static ForgeConfigSpec.DoubleValue SHEEP_MULTIPLIER;
@@ -186,7 +186,7 @@ public class Config {
             WOLF_DAMAGE = SERVER_BUILDER.comment("extra flat damage when tamed pets attack").
                     defineInRange("damage", 1f, 0, 10);
             WOLF_CHANCE = SERVER_BUILDER.comment("chance of tamed pets have damage reduce to 1").
-                    defineInRange("chance", 0.2, 0, 1);
+                    defineInRange("chance", 20, 0, 100);
             WOLF_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier apply to attacks against the player ").
                     defineInRange("multiplier_neg", 0.1, 0, 10);
             SERVER_BUILDER.pop();
@@ -312,7 +312,7 @@ public class Config {
             for (String cardName : cardNames){
                 SERVER_BUILDER.push(cardName);
                 mapDropRate.put(cardName, SERVER_BUILDER
-                        .defineInRange("drop_rate", 100, 0, 100));
+                        .defineInRange("drop_rate", 3, 0, 100));
                 SERVER_BUILDER.pop();
             }
 

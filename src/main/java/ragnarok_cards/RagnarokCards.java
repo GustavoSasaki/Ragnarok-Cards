@@ -95,4 +95,9 @@ public class RagnarokCards
         ModNetwork.init();
     }
 
+
+    //todo putInInventory ragnarok activate seem
+    //todo change bag when open
+    //todo fix droprate of default config
+
 }

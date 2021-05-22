@@ -11,7 +11,10 @@ import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.ParrotEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import ragnarok_cards.Items.RagnarokCard;
 
@@ -21,92 +24,92 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import static ragnarok_cards.RagnarokCards.MOD_ID;
 import static ragnarok_cards.Utils.DamageMultiplier.ApplyDamageMultiplier;
 import static ragnarok_cards.Utils.DefenseMultiplier.ApplyDefenseMultiplier;
+import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 import static ragnarok_cards.Utils.SecundaryEffectsAttack.ApplyAttackSecundayEffects;
 import static ragnarok_cards.Utils.onKill.ApplyOnKillEffects;
 
 public class VerificateCards {
     static public final Random rand = new Random();
-    static protected Map<String, Integer> cardNameToChance = new HashMap<String, Integer>();
-    static{
-        cardNameToChance.put("blaze",30);
-        cardNameToChance.put("snowman", 5);
-        cardNameToChance.put("wolf", 20);
-        cardNameToChance.put("ocelot", 30);
-        cardNameToChance.put("whiter_skeleton", 2);
-        cardNameToChance.put("zombie_piglin", 4);
-        cardNameToChance.put("cave_spider", 4);
-        cardNameToChance.put("creeper", 20);
-        cardNameToChance.put("phantom", 2);//if pass, activate negative effect
-        cardNameToChance.put("sheep", 2);//if pass, activate negative effect
-        cardNameToChance.put("witch",3);
-    }
 
     static public boolean passCheck(int quantity, double checkMultiplier){
         return (rand.nextInt(100 ) < quantity * checkMultiplier );
     }
-    static public boolean passCheck(String cardName,  Map<String, Integer> cards){
-        return rand.nextInt(100 ) < cards.get(cardName) * cardNameToChance.get(cardName) ;
+
+    static public boolean SingleCardActivate (PlayerEntity player,String cardName,int multiplier ){
+        return passCheck( HowManyCards(player,cardName), multiplier);
     }
 
     static public int HowManyCards(PlayerEntity player, String cardName){
-        int quantity = 0;
-
-        //go through upper inventory row
-        for(int i=9;i<18;i++){
-            Item item = player.inventory.mainInventory.get(i).getItem();
-
-            if(item instanceof RagnarokCard && ((RagnarokCard)item).getCardName().equals(cardName)){
-                quantity += 1;
-            }
-        }
-        return quantity;
+        CompoundNBT cards = HowManyCards(player);
+        return cards.contains(cardName) ? cards.getInt(cardName) : 0;
     }
 
-    static public Map<String, Integer> HowManyCards(PlayerEntity player){
-        Map<String, Integer> quantity = new HashMap<String, Integer>();
+    static public CompoundNBT HowManyCards(PlayerEntity player){
 
-        //go through upper inventory row
-        for(int i=9;i<18;i++){
-            Item item = player.inventory.mainInventory.get(i).getItem();
-            if(!(item instanceof RagnarokCard)){
-                continue;
-            }
-
-            String cardName = ((RagnarokCard)item).getCardName();
-            if(quantity.containsKey(cardName)){
-                quantity.put(cardName, quantity.get(cardName) + 1);
-            }else{
-                quantity.put(cardName,1);
-            }
+        CompoundNBT player_not_persist_nbt =getNbtSafe(player.getPersistentData(),MOD_ID);
+        if(! player_not_persist_nbt.contains("bag_slot")){
+            return null;
         }
-        return quantity;
+
+        int bag_slot = player_not_persist_nbt.getInt("bag_slot");
+
+        CompoundNBT player_persist_nbt = getNbtSafe(player.getPersistentData(),PlayerEntity.PERSISTED_NBT_TAG);
+        player_persist_nbt = getNbtSafe(player_persist_nbt,MOD_ID);
+        long player_bag_id = player_persist_nbt.getLong("bag_id");
+
+
+
+        if( IsBagActive(player.inventory.getStackInSlot( bag_slot),player_bag_id)){
+            return player.inventory.getStackInSlot( bag_slot).getOrCreateChildTag(MOD_ID);
+        }else{
+            int slot = 0;
+            for(ItemStack stack : player.inventory.mainInventory){
+                if( IsBagActive(stack, player_bag_id) ){
+                    player_not_persist_nbt.putInt("bag_slot",slot);
+                    stack.getChildTag(MOD_ID).putInt("bag_slot",slot);
+                    return stack.getChildTag(MOD_ID);
+                }
+                slot++;
+            }
+
+        }
+
+        return null;
     }
 
-    static public boolean SingleCardActivate (PlayerEntity player, String cardName, double multiplier){
-        int quantity = HowManyCards(player, cardName);
-        return passCheck(quantity,cardNameToChance.get(cardName) * multiplier);
+    static private boolean IsBagActive(ItemStack stack, long player_bag_id){
+        CompoundNBT bag_nbt = stack.getChildTag(MOD_ID);
+
+        return bag_nbt != null && bag_nbt.contains("bag_id") && bag_nbt.getLong("bag_id") == player_bag_id;
     }
 
 
 
     static public float ApplyAttackCards(float damage, DamageSource source, LivingEntity target){
         PlayerEntity player = (PlayerEntity) source.getTrueSource();
-        Map<String, Integer> cards = HowManyCards(player);
+        CompoundNBT cards = HowManyCards(player);
+        if(cards == null){
+            return damage;
+        }
 
         ApplyAttackSecundayEffects (source,target, cards);
 
         damage = ApplyDamageMultiplier (damage, source, target,cards);
 
-        if(damage >= target.getHealth()){
-            ApplyOnKillEffects(source,target, cards);
-        }
+        //if(damage >= target.getHealth()){
+        //    ApplyOnKillEffects(source,target, cards);
+        //}
         return damage;
     }
 
     static public float ApplyDefenseCards(float damage, PlayerEntity player, DamageSource source){
-        Map<String, Integer> cards = HowManyCards(player);
+        CompoundNBT cards = HowManyCards(player);
+        if(cards == null){
+            return damage;
+        }
 
 
         return ApplyDefenseMultiplier (damage, player, source,cards);

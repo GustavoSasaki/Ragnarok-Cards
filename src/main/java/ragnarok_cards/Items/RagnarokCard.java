@@ -3,23 +3,17 @@ package ragnarok_cards.Items;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import org.apache.commons.lang3.Range;
 import org.lwjgl.glfw.GLFW;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +38,7 @@ public class RagnarokCard extends Item {
         translationKeyDebuffs = IntStream.range(0, quantityDebuffs).
                 mapToObj(x -> "item.ragnarok_cards."+this.cardName+".debuff"+String.valueOf(x)).collect(Collectors.toList());
 
-        GLM.register(cardName + "_card", LootModifiers.AddMobDrop.Serializer::new);
+        GLM.register(cardName + "_card", RagnarokCardLootModifiers.AddMobDrop.Serializer::new);
     }
 
 

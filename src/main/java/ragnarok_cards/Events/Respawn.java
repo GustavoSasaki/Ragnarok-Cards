@@ -22,9 +22,6 @@ public class Respawn {
     @SubscribeEvent
     public static void ClonePersistentNbtClient(PlayerEvent.PlayerRespawnEvent event) {
 
-        System.out.println(event.getPlayer().world.isRemote);
-        System.out.println(event.getPlayer().world.isRemote);
-        System.out.println(event.getPlayer().world.isRemote);
         //setting nbt in the servers
         CompoundNBT persistent_nbt = getNbtSafe(event.getPlayer().getPersistentData(),PlayerEntity.PERSISTED_NBT_TAG);
         CompoundNBT player_nbt = getNbtSafe(persistent_nbt,MOD_ID);

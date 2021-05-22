@@ -133,9 +133,11 @@ public class BagContainer extends Container {
 
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
+
+        long id = stack.getChildTag(MOD_ID).getLong("bag_id");
         stack.removeChildTag(MOD_ID);
         CompoundNBT nbt = stack.getOrCreateChildTag(MOD_ID);
-
+        nbt.putLong("bag_id",id);
 
         for(int i=0;i<18;i++){
             ItemStack card = this.inventorySlots.get(i).getStack();

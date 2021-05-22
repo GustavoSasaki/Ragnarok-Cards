@@ -41,7 +41,7 @@ public class EatFood {
                 int power = SHEEP_EFFECT_POWER.get().get(randomEffects);
                 int time = SHEEP_EFFECT_TIME.get().get(randomEffects);
                 int id = SHEEP_EFFECT.get().get(randomEffects);
-                player.addPotionEffect(toEffect.get(id).apply(time,power));
+                player.addPotionEffect(toEffect.get(id).apply(time, power));
             }
         }
     }

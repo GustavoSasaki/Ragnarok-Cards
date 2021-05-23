@@ -1,5 +1,5 @@
 {
-  "type": "ragnarok_cards:whiter_skeleton_card",
+  "type": "ragnarok_cards:wither_skeleton_card",
   "conditions":
   [
     {
@@ -11,5 +11,5 @@
     }
   ],
   "chance": 6,
-  "cardItem":"ragnarok_cards:whiter_skeleton_card"
+  "cardItem":"ragnarok_cards:wither_skeleton_card"
 }

@@ -220,7 +220,7 @@ public class Config {
             WITCH_EFFECT_NEG = SERVER_BUILDER.comment("IDs of the potion effects; (you can get the ID in the Effect Wiki Page)").
                     defineList("effect_neg", Arrays.asList(1,2,5,10,11,12,13,14,19,20,21,22,24,25,28), x -> true);
             WITCH_TIME_NEG = SERVER_BUILDER.defineList("time_neg",
-                    Arrays.asList(200,200,200,200,200,200,200,100,100,100,200,200,100,100,200), x -> true);
+                    Arrays.asList(600,600,600,600,600,600,600,300,300,300,600,600,300,300,600), x -> true);
             WITCH_POWER_NEG  = SERVER_BUILDER.defineList("power_neg",
                     Arrays.asList(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), x -> true);
 

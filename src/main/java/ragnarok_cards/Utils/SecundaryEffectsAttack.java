@@ -40,9 +40,9 @@ public class SecundaryEffectsAttack {
 
         }
 
-        if(!source.isProjectile() && cards.contains("whiter_skeleton")) {
+        if(!source.isProjectile() && cards.contains("wither_skeleton")) {
 
-            if (passCheck( cards.getInt("whiter_skeleton"), WITHER_SKELETON_CHANCE.get())) {
+            if (passCheck( cards.getInt("wither_skeleton"), WITHER_SKELETON_CHANCE.get())) {
 
                 ((ServerWorld) player.world).playSound((PlayerEntity)null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_WITHER_AMBIENT, player.getSoundCategory(), 1.0F, 1.0F);
                 target.addPotionEffect(new EffectInstance(Effects.WITHER, WITHER_SKELETON_TIME.get()));

@@ -12,7 +12,7 @@ import static ragnarok_cards.RagnarokCards.MOD_ID;
 
 public class RegisterItems {
     public static String[] cardNames = {"blaze", "cave_spider", "creeper", "ocelot","phantom", "pig", "piglin", "sheep",
-            "skeleton","snow_golem", "spider", "whiter_skeleton", "witch","wolf","zoglin","zombie","zombie_piglin"};
+            "skeleton","snow_golem", "spider", "wither_skeleton", "witch","wolf","zoglin","zombie","zombie_piglin"};
 
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
@@ -33,7 +33,7 @@ public class RegisterItems {
     public static final RegistryObject<Item>  SKELETON_CARD = RegisterCard("skeleton",2,1);
     public static final RegistryObject<Item> SNOWMAN_CARD = RegisterCard("snow_golem",1,0);
     public static final RegistryObject<Item> SPIDER_CARD = RegisterCard("spider",1,1);
-    public static final RegistryObject<Item>  WHITER_SKELETON_CARD = RegisterCard("whiter_skeleton",2,1);
+    public static final RegistryObject<Item>  WITHER_SKELETON_CARD = RegisterCard("wither_skeleton",2,1);
     public static final RegistryObject<Item>  WITCH_CARD = RegisterCard("witch",1,1);
     public static final RegistryObject<Item>  WOLF_CARD = RegisterCard("wolf",2,1);
     public static final RegistryObject<Item> ZOMBIE_CARD = RegisterCard("zombie",1,1);

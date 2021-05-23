@@ -17,11 +17,12 @@ public class BagScreen extends ContainerScreen<BagContainer> {
 
     private ResourceLocation GUI;
 
+    //todo maybe change the numbers, i dont know
     public BagScreen(BagContainer container, PlayerInventory playerInventory, ITextComponent name) {
         super(container, playerInventory, name);
         GUI = new ResourceLocation(MOD_ID, "textures/gui/bag_gui.png");
         xSize = 176;
-        ySize = 150;
+        ySize = 132;
     }
 
     @Override

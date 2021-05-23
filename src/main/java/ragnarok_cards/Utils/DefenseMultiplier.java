@@ -95,8 +95,8 @@ public class DefenseMultiplier {
             multiplier *= ZOMBIE_MULTIPLIER_NEG.get() * cards.getInt("zombie");
         }
 
-        if(cards.contains("whiter_skeleton") && source.isExplosion()) {
-            multiplier *= 1 + cards.getInt("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get();
+        if(cards.contains("wither_skeleton") && source.isExplosion()) {
+            multiplier *= 1 + cards.getInt("wither_skeleton") * WITHER_SKELETON_MULTIPLIER_NEG.get();
         }
         if(cards.contains("wolf")) {
             multiplier *= 1 + cards.getInt("wolf") * WOLF_MULTIPLIER_NEG.get() ;

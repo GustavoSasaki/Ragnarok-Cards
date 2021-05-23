@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "ragnarok_cards:whiter_skeleton_card"
+      "item": "ragnarok_cards:wither_skeleton_card"
     },
     "title": {
       "translate": "advancement.ragnarok_cards.nether_cards.title"
@@ -24,12 +24,12 @@
         ]
       }
     },
-    "whiter_skeleton": {
+    "wither_skeleton": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "ragnarok_cards:whiter_skeleton_card"
+            "item": "ragnarok_cards:wither_skeleton_card"
           }
         ]
       }

@@ -85,7 +85,7 @@ public class BagContainer extends Container {
             return ItemStack.EMPTY;
         }
         //the slot from this function and from player intentory hae different orders
-        if(slot - 45 == slotContainer ){
+        if(slot - 36 == slotContainer ){
             return ItemStack.EMPTY;
         }
 
@@ -103,12 +103,12 @@ public class BagContainer extends Container {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 9; x++) {
                 int index = (x + (y+1) * 9);
-                this.addSlot(new Slot(playerInventory, index, 8 + x * 18, 68 + y * 18));
+                this.addSlot(new Slot(playerInventory, index, 8 + x * 18, 50 + y * 18));
             }
         }
 
         for (int x = 0; x < 9; x++) {
-            this.addSlot(new Slot(playerInventory, x, 8 + x * 18, 126));
+            this.addSlot(new Slot(playerInventory, x, 8 + x * 18, 108));
         }
     }
 
@@ -120,6 +120,7 @@ public class BagContainer extends Container {
         int maxY = BagItem.size / 9;
         int curIndex = 0;
 
+        //todo change xPos e Ypos
         for (int y = 0; y < maxY; y++) {
             for (int x = 0; x < 9; x++) {
                 this.addSlot(new BagSlot(handler, curIndex, 8 + x*18, (y+1)*18));
@@ -134,12 +135,14 @@ public class BagContainer extends Container {
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
 
+        //reset nbt
         long id = stack.getChildTag(MOD_ID).getLong("bag_id");
         stack.removeChildTag(MOD_ID);
         CompoundNBT nbt = stack.getOrCreateChildTag(MOD_ID);
         nbt.putLong("bag_id",id);
 
-        for(int i=0;i<18;i++){
+        //add all cards inside the bag
+        for(int i=0;i<BagItem.size;i++){
             ItemStack card = this.inventorySlots.get(i).getStack();
             if(!card.isEmpty()) {
                 String card_name = ((RagnarokCard) card.getItem()).cardName;

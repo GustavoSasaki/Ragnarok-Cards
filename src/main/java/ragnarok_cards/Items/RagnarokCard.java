@@ -70,16 +70,15 @@ public class RagnarokCard extends Item {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 
         //put int he upper row inventory if possible
-        for(int i=9;i<18;i++){
+        //for(int i=9;i<18;i++){
 
-            if(playerIn.inventory.mainInventory.get(i).isEmpty()){
-                playerIn.inventory.setInventorySlotContents(i,playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem));
-                playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem,ItemStack.EMPTY);
-
-                playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, playerIn.getSoundCategory(), 1.0F, 1.0F);
-                break;
-            }
-        }
+       //     if(playerIn.inventory.mainInventory.get(i).isEmpty()){
+       //         playerIn.inventory.setInventorySlotContents(i,playerIn.inventory.getStackInSlot(playerIn.inventory.currentItem));
+       //         playerIn.inventory.setInventorySlotContents(playerIn.inventory.currentItem,ItemStack.EMPTY);
+        //        playerIn.playSound(SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, playerIn.getSoundCategory(), 1.0F, 1.0F);
+        //        break;
+        //    }
+        //}
         return ActionResult.resultPass(playerIn.getHeldItem(handIn));
     }
 }

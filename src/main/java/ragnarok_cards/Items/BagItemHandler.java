@@ -15,7 +15,7 @@ public class BagItemHandler extends ItemStackHandler {
     private ItemStack itemStack;
     private boolean change;
     public BagItemHandler(ItemStack itemStack) {
-        super(18);
+        super(BagItem.size);
         this.itemStack = itemStack;
     }
 
@@ -54,7 +54,7 @@ public class BagItemHandler extends ItemStackHandler {
 
     @Override
     public void deserializeNBT(CompoundNBT nbt) {
-        setSize(18);
+        setSize(BagItem.size);
         super.deserializeNBT(nbt);
 
     }

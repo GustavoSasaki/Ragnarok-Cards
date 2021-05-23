@@ -54,12 +54,12 @@
         ]
       }
     },
-    "whiter_skeleton": {
+    "wihter_skeleton": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "ragnarok_cards:whiter_skeleton_card"
+            "item": "ragnarok_cards:wither_skeleton_card"
           }
         ]
       }

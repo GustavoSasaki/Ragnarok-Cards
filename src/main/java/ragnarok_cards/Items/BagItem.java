@@ -26,7 +26,7 @@ import static ragnarok_cards.RegisterItems.cardNames;
 import static ragnarok_cards.Utils.SafeNbt.getNbtSafe;
 
 public class BagItem extends Item {
-    public static int size = 18;
+    public static int size = 9;
 
     public BagItem() {
         super(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1));
@@ -76,13 +76,13 @@ public class BagItem extends Item {
             Supplier<ServerPlayerEntity> supplier = () -> (ServerPlayerEntity) playerIn;
             ModNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(supplier), new SyncBagId(bag_id));
 
-            System.out.println( "---------------------");
-            for( String name : cardNames){
-                if(bag_nbt.contains(name)){
-                    System.out.println( name + ": "+Integer.toString(bag_nbt.getInt(name)));
-                }
-            }
-            System.out.println( "---------------------");
+            //System.out.println( "---------------------");
+            //for( String name : cardNames){
+            //    if(bag_nbt.contains(name)){
+            //        System.out.println( name + ": "+Integer.toString(bag_nbt.getInt(name)));
+            //    }
+           // }
+            //System.out.println( "---------------------");
 
             playerIn.openContainer(new INamedContainerProvider() {
                 @Nullable

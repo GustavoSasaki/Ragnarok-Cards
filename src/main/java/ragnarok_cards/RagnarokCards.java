@@ -96,8 +96,13 @@ public class RagnarokCards
     }
 
 
-    //todo putInInventory ragnarok activate seem
-    //todo change bag when open
-    //todo fix droprate of default config
+    //todo when putIninventory activate seem nbt of player
+    //todo change bag texture when open
+    //todo put items when right click
+    //todo more cards
+    //todo texture change
+    //todo jei compatibity
+    //todo post in curseforge + explanation + photos
+    //todo when enter the server show bag active
 
 }

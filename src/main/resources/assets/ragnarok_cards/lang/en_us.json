@@ -44,10 +44,10 @@
 	"item.ragnarok_cards.spider.buff0":"Bane of arthropods",
 	"item.ragnarok_cards.spider.debuff0":"Bane of arthropods",
 
-	"item.ragnarok_cards.whiter_skeleton_card": "Whiter Skeleton Card",
-	"item.ragnarok_cards.whiter_skeleton.buff0": "2% to apply whiter with close range weapons",
-	"item.ragnarok_cards.whiter_skeleton.buff1": "50% increase damage against enemies with wither",
-	"item.ragnarok_cards.whiter_skeleton.debuff0": "explosions deal 30% more damage",
+	"item.ragnarok_cards.wither_skeleton_card": "Wither Skeleton Card",
+	"item.ragnarok_cards.wither_skeleton.buff0": "2% to apply wither with close range weapons",
+	"item.ragnarok_cards.wither_skeleton.buff1": "50% increase damage against enemies with wither",
+	"item.ragnarok_cards.wither_skeleton.debuff0": "explosions deal 30% more damage",
 
 	"item.ragnarok_cards.witch_card": "Witch Card",
 	"item.ragnarok_cards.witch.buff0": "Multiplies damage by 1.2 for each effect in the enemy with close range weapons",

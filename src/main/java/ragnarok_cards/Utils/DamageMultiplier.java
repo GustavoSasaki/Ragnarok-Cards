@@ -53,8 +53,8 @@ public class DamageMultiplier {
             multiplier *= 1 + cards.getInt("pig") * PIG_MULTIPLIER_NEG.get();
         }
 
-        if(cards.contains("whiter_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {
-            multiplier *= 1 + cards.getInt("whiter_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
+        if(cards.contains("wither_skeleton") && target.isPotionActive(Effects.WITHER) && !source.isProjectile()) {
+            multiplier *= 1 + cards.getInt("wither_skeleton") * WITHER_SKELETON_MULTIPLIER.get();
         }
 
         if(source.isProjectile() == false && cards.contains("witch")) {

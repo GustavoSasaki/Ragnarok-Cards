@@ -22,7 +22,7 @@ public class LootBoxRecipe extends SpecialRecipe {
 
     @Override
     public boolean matches(CraftingInventory inv, World worldIn) {
-        boolean hasChest = true;
+        boolean hasChest = false;
         int ragnarokCards = 0;
         for(int i=0;i<inv.getSizeInventory();i++){
 

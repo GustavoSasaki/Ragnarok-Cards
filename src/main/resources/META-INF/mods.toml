@@ -8,7 +8,7 @@ updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards/raw/master/update
 
 [[mods]]
 modId="ragnarok_cards"
-version="1.16.4-0.0.8"
+version="1.16.4-0.1.1"
 displayName="Ragnarok Cards"
 
 updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
@@ -18,6 +18,7 @@ logoFile="logo.png" #optional
 
 credits='''Programmer:Gustavo Sasaki (TheAgente00g)
 Artist: trillium109, Pepson
+Special Thanks: dirtis1979, koffekid
 '''
 #authors="Gustavo Sasaki (TheAgent00g)" #optional
 description='''
@@ -34,6 +35,6 @@ Every card is dropped by a unique vanilla mob with a really low chance.'''
 [[dependencies.ragnarok_cards]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.4,1.17)"
+    versionRange="[1.16.1,1.17)"
     ordering="NONE"
     side="BOTH"

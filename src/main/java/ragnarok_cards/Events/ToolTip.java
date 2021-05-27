@@ -22,7 +22,7 @@ public class ToolTip {
 
     @SubscribeEvent
     public static void ToolTipEvent(ItemTooltipEvent event) {
-        if(!(event.getItemStack().getItem() instanceof BagItem)){
+        if(!(event.getItemStack().getItem() instanceof BagItem) || event.getPlayer() == null){
             return;
         }
 

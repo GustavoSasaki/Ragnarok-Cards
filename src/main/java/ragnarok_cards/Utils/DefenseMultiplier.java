@@ -22,6 +22,7 @@ public class DefenseMultiplier {
     static public float ApplyDefenseMultiplier (float damage, PlayerEntity player, DamageSource source,CompoundNBT cards){
 
         LivingEntity attacker = (LivingEntity) source.getTrueSource();
+        boolean hasAttacker = (attacker != null);
         boolean reduceToMin = false;
         float multiplier = 1;
         int flatDamageIncrease = 0;
@@ -67,12 +68,12 @@ public class DefenseMultiplier {
             }
         }
 
-        if(cards.contains("cave_spider") && attacker.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
+        if(cards.contains("cave_spider") && hasAttacker &&attacker.getCreatureAttribute() == CreatureAttribute.ARTHROPOD) {
             flatDamageIncrease +=  cards.getInt("cave_spider") * CAVE_SPIDER_DAMAGE_NEG.get();
             player.addPotionEffect(new EffectInstance(Effects.SLOWNESS, CAVE_SPIDER_SLOW_TIME_NEG.get(),4));
         }
 
-        if(cards.contains("piglin") && attacker.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
+        if(cards.contains("piglin") && hasAttacker && attacker.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
             multiplier *= (1 + PIGLIN_MULTIPLIER_NEG.get() * cards.getInt("piglin")  );
 
             if (passCheck(cards.getInt("piglin"), PIGLIN_CHANCE_NEG.get())) {

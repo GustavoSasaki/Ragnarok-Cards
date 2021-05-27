@@ -95,14 +95,12 @@ public class RagnarokCards
         ModNetwork.init();
     }
 
-
-    //todo when putIninventory activate seem nbt of player
-    //todo change bag texture when open
-    //todo put items when right click
+    //todo port mod to all of 1.16 ; 1.15 ; 1.14
     //todo more cards
-    //todo texture change
     //todo jei compatibity
-    //todo post in curseforge + explanation + photos
-    //todo when enter the server show bag active
+
+    //todo put items when right click
+    //todo change bag texture when open
+    //todo texture change
 
 }

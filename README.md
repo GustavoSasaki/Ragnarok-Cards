@@ -1,5 +1,3 @@
-![Ragnarok Cards](https://i.imgur.com/DyTcViy.png)
-
 This Minecraft Mod adds a new type of equipment, the [Ragnarok Cards](https://github.com/GustavoSasaki/Ragnarok-Cards/wiki/Ragnarok-Card), which gives to the player a variety of positive and negative effects.
 
 

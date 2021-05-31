@@ -15,7 +15,7 @@ Examples:
 
 ---
 
-Also, since every vanilla mob (at least in the future updates) have a really rare chance to drop its unique Ragnarok Card, this mod gives to the players a new goals, collect all the Ragnarok Cards and makes more rewarding exploring and killing mobs (especially useless ones, such as bats).
+Also, since every vanilla mob (at least in the future updates) have a really rare chance to drop its unique Ragnarok Card, this mod makes more rewarding exploring and killing mobs (especially useless ones, such as bats) and gives to the players a new goals, collect all the Ragnarok Cards.
 
 ---
 

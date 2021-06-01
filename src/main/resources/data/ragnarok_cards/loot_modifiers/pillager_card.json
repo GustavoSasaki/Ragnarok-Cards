@@ -1,0 +1,15 @@
+{
+  "type": "ragnarok_cards:pillager_card",
+  "conditions":
+  [
+    {
+      "condition": "minecraft:entity_properties",
+      "predicate": {
+        "type": "minecraft:pillager"
+      },
+      "entity": "this"
+    }
+  ],
+  "chance": 4,
+  "cardItem":"ragnarok_cards:pillager_card"
+}

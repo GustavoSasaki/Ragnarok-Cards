@@ -175,9 +175,20 @@
       }
     }
   },
+  "pillager": {
+    "trigger": "minecraft:inventory_changed",
+    "conditions": {
+      "items": [
+        {
+          "item": "ragnarok_cards:pillager_card"
+        }
+      ]
+    }
+  },
   "requirements": [
     [
       "zombie_piglin",
+      "pillager",
       "zombie",
       "wolf",
       "witch",

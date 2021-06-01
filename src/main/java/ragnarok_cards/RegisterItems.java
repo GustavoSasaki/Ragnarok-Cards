@@ -11,7 +11,7 @@ import ragnarok_cards.Items.RagnarokCard;
 import static ragnarok_cards.RagnarokCards.MOD_ID;
 
 public class RegisterItems {
-    public static String[] cardNames = {"blaze", "cave_spider", "creeper", "ocelot","phantom", "pig", "piglin", "sheep",
+    public static String[] cardNames = {"blaze", "cave_spider", "creeper", "ocelot","phantom", "pig", "piglin", "pillager","sheep",
             "skeleton","snow_golem", "spider", "wither_skeleton", "witch","wolf","zoglin","zombie","zombie_piglin"};
 
 
@@ -29,6 +29,7 @@ public class RegisterItems {
     public static final RegistryObject<Item>  PHANTOM_CARD = RegisterCard("phantom",1,1);
     public static final RegistryObject<Item>  PIG_CARD = RegisterCard("pig",1,1);
     public static final RegistryObject<Item>  PIGLIN_CARD = RegisterCard("piglin",1,1);
+    public static final RegistryObject<Item> PILLAGER_CARD = RegisterCard("pillager",1,2);
     public static final RegistryObject<Item>  SHEEP_CARD = RegisterCard("sheep",1,1);
     public static final RegistryObject<Item>  SKELETON_CARD = RegisterCard("skeleton",2,1);
     public static final RegistryObject<Item> SNOWMAN_CARD = RegisterCard("snow_golem",1,0);

@@ -85,6 +85,16 @@
       }
     }
   },
+  "pillager": {
+    "trigger": "minecraft:inventory_changed",
+    "conditions": {
+      "items": [
+        {
+          "item": "ragnarok_cards:pillager_card"
+        }
+      ]
+    }
+  },
   "rewards": {
     "experience": 10
   }

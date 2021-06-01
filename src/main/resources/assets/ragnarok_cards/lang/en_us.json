@@ -28,6 +28,11 @@
 	"item.ragnarok_cards.piglin.buff0":"+1.5 damage with bad material weapons and tools",
 	"item.ragnarok_cards.piglin.debuff0":"Attacks from undead are 20% stronger and causes hunger",
 
+	"item.ragnarok_cards.pillager_card": "Pillager Card",
+	"item.ragnarok_cards.pillager.buff0": "Ranged Weapons deal 20% more damage",
+	"item.ragnarok_cards.pillager.debuff0": "Melee Weapons deal 1 less flat damage",
+	"item.ragnarok_cards.pillager.debuff1": "20% decrease Knock Back",
+
 	"item.ragnarok_cards.sheep_card": "Sheep Card",
 	"item.ragnarok_cards.sheep.buff0":"25% damage increase against animals",
 	"item.ragnarok_cards.sheep.debuff0":"Extra effects when eating meat",

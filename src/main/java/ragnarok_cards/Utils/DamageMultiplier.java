@@ -62,6 +62,14 @@ public class DamageMultiplier {
             multiplier *= Math.pow(witch_multiplier, target.getActivePotionEffects().size());
         }
 
+        if(cards.contains("pillager")) {
+            if(source.isProjectile()  ) {
+                multiplier *= 1 + cards.getInt("pillager") * PILLAGER_MULTIPLIER.get();
+            }else{
+                flatDamageBuff -= cards.getInt("pillager") * PILLAGER_DAMAGE_NEG.get();
+            }
+        }
+
         if(cards.contains("zombie_piglin")) {
             if (passCheck(cards.getInt("zombie_piglin"), ZOMBIE_PIGLIN_CHANCE.get() )) {
                 multiplier *= ZOMBIE_PIGLIN_MULTIPLIER.get();
@@ -89,7 +97,13 @@ public class DamageMultiplier {
 
         multiplier = ApplySkeletonCard(player,target,multiplier,cards);
 
-        return ((damage + flatDamageBuff) * multiplier);
+        if(damage != 0){
+            damage = ((damage + flatDamageBuff) * multiplier);
+            damage = damage > 0 ? damage : 1;
+        }else{
+            damage = ((damage + flatDamageBuff) * multiplier);
+        }
+        return damage;
     }
 
 

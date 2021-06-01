@@ -99,8 +99,9 @@ public class RagnarokCards
     //todo more cards
     //todo jei compatibity
 
+    //todo texture change
+
     //todo put items when right click
     //todo change bag texture when open
-    //todo texture change
 
 }

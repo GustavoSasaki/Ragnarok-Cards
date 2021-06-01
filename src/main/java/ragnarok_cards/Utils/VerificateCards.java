@@ -44,6 +44,9 @@ public class VerificateCards {
 
     static public int HowManyCards(PlayerEntity player, String cardName){
         CompoundNBT cards = HowManyCards(player);
+        if( cards == null){
+            return 0;
+        }
         return cards.contains(cardName) ? cards.getInt(cardName) : 0;
     }
 

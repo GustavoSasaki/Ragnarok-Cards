@@ -109,6 +109,9 @@ public class Config {
         public static ForgeConfigSpec.IntValue BLAZE_TIME2;
         public static ForgeConfigSpec.DoubleValue BLAZE_KNOCKBACK_NEG;
 
+        public static ForgeConfigSpec.DoubleValue PILLAGER_MULTIPLIER;
+        public static ForgeConfigSpec.IntValue PILLAGER_DAMAGE_NEG;
+        public static ForgeConfigSpec.DoubleValue PILLAGER_KNOCKBACK_NEG;
 
         static{
 
@@ -231,6 +234,17 @@ public class Config {
                     defineInRange("multiplier", 0.25f, 0, 1);
             PIG_MULTIPLIER_NEG = SERVER_BUILDER.comment("damage multiplier when player receive fall damage").
                     defineInRange("multiplier_neg", 0.15f, 0, 1);
+            SERVER_BUILDER.pop();
+
+
+
+            SERVER_BUILDER.push("pillager");
+            PILLAGER_MULTIPLIER = SERVER_BUILDER.comment("damage multiplier apply to ranged weapons").
+                    defineInRange("damage", 0.2f, 0, 1);
+            PILLAGER_DAMAGE_NEG = SERVER_BUILDER.comment("flat damage decrease when using melee weapons").
+                    defineInRange("multiplier_neg", 1, 0, 10);
+            PILLAGER_KNOCKBACK_NEG = SERVER_BUILDER.comment("knock back multiplier decrease when using melee weapons").
+                    defineInRange("knockback_neg", 0.2f, 0, 1);
             SERVER_BUILDER.pop();
 
             SERVER_BUILDER.push("snow_golem");

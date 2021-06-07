@@ -1,26 +1,25 @@
-
 modLoader="javafml"
 loaderVersion="[35,)"
 license="MIT"
-
 issueTrackerURL="https://github.com/GustavoSasaki/Ragnarok-Cards/issues"
-updateJSONURL="https://raw.githubusercontent.com/GustavoSasaki/Ragnarok-Cards/update_checker/update.json"
+logoFile="logo.png"
+
 
 [[mods]]
 modId="ragnarok_cards"
-version="1.0.0"
+version="1.16.4-1.2"
 displayName="Ragnarok Cards"
+updateJSONURL="https://raw.githubusercontent.com/GustavoSasaki/Ragnarok-Cards/update_checker/update.json"
 displayURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
-logoFile="logo.png" #optional
-
-credits='''Programmer:Gustavo Sasaki (TheAgente00g)
+credits='''
+Programmer: Gustavo Sasaki (TheAgent00g)
 Artist: trillium109, Pepson
 Special Thanks: dirtis1979, koffekid
 '''
-#authors="Gustavo Sasaki (TheAgent00g)" #optional
+
 description='''
-This mod adds the Ragnarok Cards, they are items, which when in the upper row of player inventory gives a variety of combat buffs and debuffs.
-Every card is dropped by a unique vanilla mob with a really low chance.'''
+This Minecraft Mod adds a new type of equipment, the Ragnarok Cards, which expands the number of possible builds, and makes viable multiple specialization,
+Such as in ranged weapons or applying negative effects on the enemy or even being really good at killing pigs.'''
 
 [[dependencies.ragnarok_cards]] #optional
     modId="forge"

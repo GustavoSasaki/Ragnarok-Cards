@@ -9,7 +9,7 @@ logoFile="logo.png"
 modId="ragnarok_cards"
 version="1.16.4-1.2"
 displayName="Ragnarok Cards"
-updateJSONURL="https://raw.githubusercontent.com/GustavoSasaki/Ragnarok-Cards/update_checker/update.json"
+updateJSONURL="https://raw.githubusercontent.com/GustavoSasaki/Ragnarok-Cards/main/update.json"
 displayURL="https://github.com/GustavoSasaki/Ragnarok-Cards"
 credits='''
 Programmer: Gustavo Sasaki (TheAgent00g)
@@ -18,7 +18,7 @@ Special Thanks: dirtis1979, koffekid
 '''
 
 description='''
-This Minecraft Mod adds a new type of equipment, the Ragnarok Cards, which expands the number of possible builds, and makes viable multiple specialization,
+This Minecraft Mod adds a new type of equipment, the Ragnarok Cards, which expands the number of possible builds, and makes viable multiple specialization.
 Such as in ranged weapons or applying negative effects on the enemy or even being really good at killing pigs.'''
 
 [[dependencies.ragnarok_cards]] #optional

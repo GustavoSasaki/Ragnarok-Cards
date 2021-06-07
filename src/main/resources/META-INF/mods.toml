@@ -4,7 +4,7 @@ loaderVersion="[35,)"
 license="MIT"
 
 issueTrackerURL="https://github.com/GustavoSasaki/Ragnarok-Cards/issues"
-updateJSONURL="https://raw.githubusercontent.com/GustavoSasaki/Ragnarok-Cards/main/update.json"
+updateJSONURL="https://github.com/GustavoSasaki/Ragnarok-Cards/blob/update_checker/update.json"
 
 [[mods]]
 modId="ragnarok_cards"
